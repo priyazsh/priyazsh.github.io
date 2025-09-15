@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "Priyansh Prajapat",
-  description: "Portfolio of Priyansh Prajapat",
+  description: "Fullstack Developer from India",
   icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: "/favicon.ico"
   },
 };
 
@@ -21,6 +21,7 @@ export default function RootLayout({
         <div id="root">
           {children}
         </div>
+        <GoogleAnalytics gaId="G-LM2B0KC5LB" />
       </body>
     </html>
   );
