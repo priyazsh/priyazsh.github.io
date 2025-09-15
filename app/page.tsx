@@ -1,12 +1,45 @@
-import Link from "next/link";
+"use client";
+
 import Image from "next/image";
+import Socials from "./components/socials";
+import ProjectCard from "./components/ProjectCard";
+import TechSpan from "./components/TechSpan";
+import { motion } from "framer-motion";
+import { kodeMono, cabin, epilogue } from './utils/fonts';
+import { 
+  textStyles, 
+  containerStyles, 
+  GradientButton, 
+  MailIcon,
+  FileTextIcon,
+  Footer
+} from './components/ui';
+
+const projects = [
+  {
+    title: "is-a.software",
+    description: "A subdomain service for developers to use in their projects, providing free and easy-to-configure subdomains for developer projects.",
+    technologies: "JavaScript, GitHub Actions",
+    sourceUrl: "https://github.com/is-a-software/is-a-software",
+    liveUrl: "https://is-a.software"
+  },
+  {
+    title: "DevProfiles",
+    description: "A platform to list your developer profile and showcase your skills to the world. Connect with other developers and build your network.",
+    technologies: "JavaScript",
+    sourceUrl: "https://github.com/oyepriyansh/DevProfiles",
+    liveUrl: "https://devprofiles.is-a.software"
+  }
+];
+
+const technologies = ["Javascript", "NextJS", "Java"];
 
 export default function Home() {
   return (
-    <div className="md:w-[500px] md:mx-auto mx-auto mt-10 text-white p-4">
-      {/* Inline Image, Title, and Username */}
+    <div className={containerStyles.main}>
+    <div className={containerStyles.content}>
       <div className="flex items-start mb-6">
-        <div className="rounded-full overflow-hidden w-20 h-20">
+        <div className="rounded-full overflow-hidden w-15 h-15 md:w-20 md:h-20">
           <Image
             alt="Priyansh Prajapat"
             src={"/oyepriyansh.webp"}
@@ -17,74 +50,76 @@ export default function Home() {
         </div>
 
         <div className="ml-4">
-          <h1 className="text-3xl font-bold mb-1">Priyansh Prajapat</h1>
-          <p className="text-gray-400">@oyepriyansh</p>
+          <h1 className={textStyles.heading}>Priyansh Prajapat</h1>
+          <p className={`${textStyles.username} ${kodeMono.className}`}>aka @oyepriyansh</p>
         </div>
       </div>
 
-      {/* Description */}
-      <p className="mb-4 text-gray-200 text-lg">
-        I'm Priyansh, 21 year old self taught developer from India, I enjoy
+      <p className={`mb-4 ${textStyles.description}`}>
+        I&apos;m Priyansh, 21 year old self taught developer from India, I enjoy
         programming and exploring technology.
       </p>
 
-      <p className="mb-6">
-        building stuff using <span>Javascript</span>, <span>Java</span> &{" "}
-        <span>NextJS</span>
-      </p>
-
-      {/* Links */}
-      <div className="flex space-x-4 mb-6">
-        <Link href={"https://github.com/oyepriyansh"} target="_blank">
-          <button>Github</button>
-        </Link>
-        <Link href={"https://x.com/oyepriyansh"} target="_blank">
-          <button>X</button>{" "}
-        </Link>
-        <Link href={"https://linkedin.com/in/oyepriyansh"} target="_blank">
-          <button>LinkedIn</button>{" "}
-        </Link>
-        <Link href={"https://instagram.com/oyepriyansh"} target="_blank">
-          <button>Instagram</button>
-        </Link>
+      <div className="mb-6 flex items-center flex-wrap">
+        <p className={`mr-2 text-gray-200 text-base ${epilogue.className}`}>
+          building stuff with
+        </p>
+        {technologies.map((tech) => (
+          <div key={tech} className={`${containerStyles.card} px-2 py-0.5 flex items-center mr-1.5 mb-1.5 hover:bg-gray-800/30 transition-all shadow-sm`}>
+            <TechSpan>{tech}</TechSpan>
+          </div>
+        ))}
       </div>
 
-      {/* Projects */}
-      <div className="projects">
-        <h2 className="text-xl font-semibold mb-4">Projects</h2>
+    <Socials/>
 
-        <div className="isasoftware mb-4">
-          <h3 className="text-lg font-medium">is-a.software</h3>
-          <p>
-            a subdomain service for developers to use in their projects built
-            with Javascript and GitHub Actions
-          </p>
-          <Link href={"https://github.com/is-a-software/is-a-software"}>
-            Source
-          </Link>
-          <br />
-          <Link href={"https://is-a.software"}>Visit is-a.software</Link>
+      <div className="projects mt-8">
+        <h2 className={`${textStyles.sectionHeading} flex items-center`}>
+          <span className="text-gray-400 mr-2 font-normal">~/</span>Projects
+        </h2>
+        
+        <div className="grid gap-4">
+          {projects.map((project) => (
+            <ProjectCard key={project.title} {...project} />
+          ))}
         </div>
-
-        <div className="devprofiles mb-4">
-          <h3 className="text-lg font-medium">DevProfiles</h3>
-          <p>
-            a platform to list your developer profile and showcase your skills
-          </p>
-          <p>Javascript</p>
-          <Link href={"https://github.com/oyepriyansh/DevProfiles"}>
-            Source
-          </Link>
-          <br />
-          <Link href={"https://devprofiles.is-a.software"}>
-            Visit DevProfiles
-          </Link>
-        </div>
-
-        {/* <div>
-          <a href={"https://amazon.com"}>Amazon Clone</a>
-        </div> */}
       </div>
+
+      <div className="mt-12 mb-4">
+        <h2 className={`${textStyles.sectionHeading} flex items-center`}>
+          <span className="text-gray-400 mr-2 font-normal">~/</span>Let&apos;s Work Together
+        </h2>
+        
+        <div className={`mt-4 p-4 ${containerStyles.card}`}>
+          <p className={`${textStyles.paragraph} mb-3`}>
+            Have a project in mind or want to collaborate? Feel free to reach out!
+          </p>
+          
+          <div className="flex items-center mt-4">
+            <GradientButton href="mailto:priyansh@cc.cc">
+              <MailIcon />
+              priyansh@cc.cc
+            </GradientButton>
+          </div>
+        </div>
+      </div>
+
+      <footer className="mt-12 pt-6 border-t border-white/10">
+        <div className="flex flex-wrap items-center justify-between">
+          <Footer />
+          
+          <motion.a 
+            href="/resume" 
+            className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <FileTextIcon />
+            View Resume
+          </motion.a>
+        </div>
+      </footer>
+    </div>
     </div>
   );
 }
