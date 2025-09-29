@@ -112,9 +112,9 @@ export default function Home() {
             </p>
 
             <div className="flex items-center mt-4">
-              <GradientButton href="mailto:priyansh@cc.cc">
+              <GradientButton href="mailto:priyanshprajapat@duck.com">
                 <MailIcon />
-                priyansh@cc.cc
+                priyanshprajapat@duck.com
               </GradientButton>
             </div>
           </div>
