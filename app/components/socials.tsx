@@ -15,7 +15,7 @@ export default function Socials() {
     
     const socialLinks: SocialLink[] = [
         {
-            href: "https://github.com/oyepriyansh",
+            href: "https://github.com/prajapatpriyansh",
             icon: LuGithub,
             label: "GitHub"
         },
@@ -25,12 +25,12 @@ export default function Socials() {
             label: "Twitter"
         },
         {
-            href: "https://linkedin.com/in/oyepriyansh",
+            href: "https://linkedin.com/in/priyanshprajapat",
             icon: LuLinkedin,
             label: "LinkedIn"
         },
         {
-            href: "https://instagram.com/oyepriyansh",
+            href: "https://instagram.com/priyanshprajapat_",
             icon: LuInstagram,
             label: "Instagram"
         }
