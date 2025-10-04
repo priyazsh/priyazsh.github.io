@@ -19,6 +19,23 @@ export const textStyles = {
   paragraph: `text-gray-300 ${epilogue.className}`,
 };
 
+// Common motion variants for consistent animations
+export const motionVariants = {
+  hover: {
+    button: { scale: 1.05 },
+    buttonSmall: { scale: 1.02 },
+    card: { scale: 1.01 },
+  },
+  tap: {
+    scale: 0.95
+  },
+  fadeInUp: {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.3 }
+  }
+};
+
 export const containerStyles = {
   main: "bg-neutral-950",
   content: "md:w-[510px] md:mx-auto mx-auto md:mt-10 text-white p-4",
@@ -39,8 +56,8 @@ export function GradientButton({ href, children, download, className = "" }: Gra
       href={href}
       download={download}
       className={`${buttonStyles.gradientPurpleBlue} px-4 py-2 rounded-md flex items-center gap-2 ${className}`}
-      whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(124, 58, 237, 0.5)" }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={motionVariants.hover.button}
+      whileTap={motionVariants.tap}
     >
       {children}
     </motion.a>
@@ -57,8 +74,8 @@ export function BackButton({ href, text }: BackButtonProps) {
     <Link href={href}>
       <motion.div 
         className="flex items-center cursor-pointer" 
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={motionVariants.hover.button}
+        whileTap={motionVariants.tap}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-left mr-2">
           <path d="m12 19-7-7 7-7"/>
@@ -80,33 +97,69 @@ export function Footer() {
   );
 }
 
-export function DownloadIcon() {
+interface IconProps {
+  size?: number;
+  className?: string;
+}
+
+function LucideIcon({ size = 16, className = "", children }: IconProps & { children: React.ReactNode }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-download">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-      <polyline points="7 10 12 15 17 10"/>
-      <line x1="12" x2="12" y1="15" y2="3"/>
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width={size} 
+      height={size} 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}
+    >
+      {children}
     </svg>
   );
 }
 
-export function FileTextIcon() {
+export function DownloadIcon({ size = 16, className = "" }: IconProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-file-text">
+    <LucideIcon size={size} className={`lucide lucide-download ${className}`}>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" x2="12" y1="15" y2="3"/>
+    </LucideIcon>
+  );
+}
+
+export function FileTextIcon({ size = 16, className = "" }: IconProps) {
+  return (
+    <LucideIcon size={size} className={`lucide lucide-file-text ${className}`}>
       <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
       <polyline points="14 2 14 8 20 8"/>
       <line x1="16" x2="8" y1="13" y2="13"/>
       <line x1="16" x2="8" y1="17" y2="17"/>
       <line x1="10" x2="8" y1="9" y2="9"/>
-    </svg>
+    </LucideIcon>
   );
 }
 
-export function MailIcon() {
+export function MailIcon({ size = 18, className = "" }: IconProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail">
+    <LucideIcon size={size} className={`lucide lucide-mail ${className}`}>
       <rect width="20" height="16" x="2" y="4" rx="2"/>
       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-    </svg>
+    </LucideIcon>
+  );
+}
+
+export function BlogIcon({ size = 16, className = "" }: IconProps) {
+  return (
+    <LucideIcon size={size} className={`lucide lucide-pen-tool ${className}`}>
+      <path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"/>
+      <path d="m5 21 3-3h-3v-3"/>
+      <path d="m14 5 3 3"/>
+      <path d="M9.5 12.5 11 11l5 5"/>
+      <path d="m16 16 3-3"/>
+    </LucideIcon>
   );
 }

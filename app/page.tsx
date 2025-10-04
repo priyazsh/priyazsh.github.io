@@ -12,8 +12,10 @@ import {
   GradientButton,
   MailIcon,
   FileTextIcon,
+  BlogIcon,
   Footer,
 } from "./components/ui";
+import { generatePersonJsonLd, generateWebsiteJsonLd } from "../lib/structured-data";
 
 const projects = [
   {
@@ -44,9 +46,21 @@ const projects = [
 const technologies = ["Javascript", "NextJS", "Java"];
 
 export default function Home() {
+  const personJsonLd = generatePersonJsonLd();
+  const websiteJsonLd = generateWebsiteJsonLd();
+
   return (
-    <div className={containerStyles.main}>
-      <div className={containerStyles.content}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      <div className={containerStyles.main}>
+        <div className={containerStyles.content}>
         <div className="flex items-start mb-6">
           <div className="rounded-full overflow-hidden w-15 h-15 md:w-20 md:h-20">
             <Image
@@ -54,7 +68,7 @@ export default function Home() {
               src={"/oyepriyansh.webp"}
               width={128}
               height={128}
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
             />
           </div>
 
@@ -120,22 +134,35 @@ export default function Home() {
           </div>
         </div>
 
-        <footer className="mt-12 pt-6 border-t border-white/10">
-          <div className="flex flex-wrap items-center justify-between">
+        <footer className="mt-12 pt-6 border-t border-white/10 text-center">
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <Footer />
 
-            <motion.a
-              href="/resume"
-              className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <FileTextIcon />
-              View Resume
-            </motion.a>
+            <div className="flex items-center gap-4">
+              <motion.a
+                href="/blog"
+                className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <BlogIcon />
+                View Blog
+              </motion.a>
+
+              <motion.a
+                href="/resume"
+                className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <FileTextIcon />
+                View Resume
+              </motion.a>
+            </div>
           </div>
         </footer>
       </div>
     </div>
+    </>
   );
 }
