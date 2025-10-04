@@ -37,19 +37,21 @@ export default function ProjectCard({
         <h3 className={`text-lg font-medium text-white ${cabin.className}`}>{title}</h3>
         
         <div className="flex space-x-3">
-          <motion.div 
-            whileHover={{ 
-              scale: 1.08,
-              boxShadow: "0 0 12px rgba(147, 51, 234, 0.5)" 
-            }} 
-            whileTap={{ scale: 0.92 }}
-            className="overflow-hidden rounded-md"
-          >
-            <Link href={sourceUrl} target="_blank" rel="noopener noreferrer" 
-                  className="flex items-center justify-center w-9 h-9 bg-gradient-to-br from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 transition-all duration-300 shadow-md">
-              <LuGithub size={18} className="text-white drop-shadow-md" />
-            </Link>
-          </motion.div>
+          {sourceUrl && sourceUrl !== "#" && (
+            <motion.div 
+              whileHover={{ 
+                scale: 1.08,
+                boxShadow: "0 0 12px rgba(147, 51, 234, 0.5)" 
+              }} 
+              whileTap={{ scale: 0.92 }}
+              className="overflow-hidden rounded-md"
+            >
+              <Link href={sourceUrl} target="_blank" rel="noopener noreferrer" 
+                    className="flex items-center justify-center w-9 h-9 bg-gradient-to-br from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 transition-all duration-300 shadow-md">
+                <LuGithub size={18} className="text-white drop-shadow-md" />
+              </Link>
+            </motion.div>
+          )}
           <motion.div 
             whileHover={{ 
               scale: 1.08,
