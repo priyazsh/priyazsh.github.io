@@ -11,25 +11,25 @@ import { generateBlogJsonLd, generateBreadcrumbJsonLd } from '../../lib/structur
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Read my thoughts on development, technology, and my journey as a self-taught programmer. Discover insights, tutorials, and experiences from my coding journey.",
+  description: "Writings by Priyansh Prajapat",
   keywords: ["Blog", "Programming", "Web Development", "Self-taught Developer", "Technology", "Coding Journey", "Tutorials"],
   openGraph: {
-    title: 'Blog - Priyansh Prajapat',
-    description: 'Read my thoughts on development, technology, and my journey as a self-taught programmer. Discover insights, tutorials, and experiences from my coding journey.',
+    title: 'Blog | Priyansh Prajapat',
+    description: 'Writings by Priyansh Prajapat',
     url: 'https://oyepriyansh.github.io/blog',
     type: 'website',
     images: [
       {
         url: '/oyepriyansh.webp',
-        width: 1200,
+        width: 630,
         height: 630,
         alt: 'Priyansh Prajapat Blog',
       }
     ],
   },
   twitter: {
-    title: 'Blog - Priyansh Prajapat',
-    description: 'Read my thoughts on development, technology, and my journey as a self-taught programmer.',
+    title: 'Blog | Priyansh Prajapat',
+    description: 'Writings by Priyansh Prajapat',
   },
 };
 

@@ -5,11 +5,10 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 export const metadata: Metadata = {
   metadataBase: new URL("https://oyepriyansh.github.io"),
   title: {
-    default: "Priyansh Prajapat - Full Stack Developer",
+    default: "Priyansh Prajapat",
     template: "%s | Priyansh Prajapat",
   },
-  description:
-    "I'm Priyansh, a 21-year-old self-taught developer from India. I enjoy programming and exploring technology. Check out my projects and connect with me!",
+  description: "Full stack developer from India",
   keywords: [
     "Priyansh Prajapat",
     "Portfolio",
@@ -42,23 +41,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://oyepriyansh.github.io",
     siteName: "Priyansh Prajapat",
-    title: "Priyansh Prajapat - Portfolio & Projects",
-    description:
-      "I'm Priyansh, a 21-year-old self-taught developer from India. I enjoy programming and exploring technology. Check out my projects and connect with me!",
+    title: "Priyansh Prajapat",
+    description: "Full stack developer from India",
     images: [
       {
         url: "/oyepriyansh.webp",
-        width: 1200,
+        width: 630,
         height: 630,
-        alt: "Priyansh Prajapat Portfolio",
+        alt: "Priyansh Prajapat",
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Priyansh Prajapat - Portfolio & Projects",
-    description:
-      "I'm Priyansh, a 21-year-old self-taught developer from India. I enjoy programming and exploring technology.",
+    card: "summary",
+    title: "Priyansh Prajapat",
+    description: "Full stack developer from India",
     creator: "@oyepriyansh",
     images: ["/oyepriyansh.webp"],
   },
@@ -78,10 +75,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta
-          name="google-site-verification"
-          content="myj1y-SqmBqLO8AY_NO0FObRz-aw77lYXphehryf0tE"
-        />
       </head>
       <body className="antialiased">
         <div id="root">{children}</div>
