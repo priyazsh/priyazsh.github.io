@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { cabin, epilogue } from '../../utils/fonts';
 import { 
   containerStyles,
@@ -10,6 +12,8 @@ import {
 } from '../../components/ui';
 import { getPostBySlug, getAllPostSlugs } from '../../../lib/posts';
 import { generateArticleJsonLd, generateBreadcrumbJsonLd } from '../../../lib/structured-data';
+import HeadingAnchor from '../../components/HeadingAnchor';
+import ScrollToAnchor from '../../components/ScrollToAnchor';
 
 interface PageProps {
   params: Promise<{
@@ -98,35 +102,56 @@ export default async function BlogPost({ params }: PageProps) {
 
   const mdxComponents = {
     h1: ({ children }: { children: React.ReactNode }) => (
-      <h1 className={`text-3xl md:text-4xl font-bold mb-6 text-white ${cabin.className}`}>
+      <HeadingAnchor level={1} className={`text-3xl md:text-4xl font-bold mb-6 text-white ${cabin.className}`}>
         {children}
-      </h1>
+      </HeadingAnchor>
     ),
     h2: ({ children }: { children: React.ReactNode }) => (
-      <h2 className={`text-2xl md:text-3xl font-semibold mb-4 mt-8 text-white ${cabin.className}`}>
+      <HeadingAnchor level={2} className={`text-2xl md:text-3xl font-semibold mb-4 mt-8 text-white ${cabin.className}`}>
         {children}
-      </h2>
+      </HeadingAnchor>
     ),
     h3: ({ children }: { children: React.ReactNode }) => (
-      <h3 className={`text-xl md:text-2xl font-medium mb-3 mt-6 text-white ${cabin.className}`}>
+      <HeadingAnchor level={3} className={`text-xl md:text-2xl font-medium mb-3 mt-6 text-white ${cabin.className}`}>
         {children}
-      </h3>
+      </HeadingAnchor>
     ),
     p: ({ children }: { children: React.ReactNode }) => (
       <p className={`${textStyles.paragraph} mb-4 leading-relaxed`}>
         {children}
       </p>
     ),
-    code: ({ children }: { children: React.ReactNode }) => (
-      <code className="bg-purple-600/20 text-purple-300 px-2 py-1 rounded-md text-sm">
-        {children}
-      </code>
-    ),
-    pre: ({ children }: { children: React.ReactNode }) => (
-      <pre className="bg-gray-900 border border-gray-700 rounded-lg p-4 mb-6 overflow-x-auto">
-        {children}
-      </pre>
-    ),
+    code: ({ className, children }: { className?: string; children: React.ReactNode }) => {
+      const match = /language-(\w+)/.exec(className || '');
+      const language = match ? match[1] : '';
+      
+      if (language) {
+        return (
+          <SyntaxHighlighter
+            style={oneDark}
+            language={language}
+            PreTag="div"
+            className="rounded-lg mb-6 text-sm"
+            customStyle={{
+              margin: 0,
+              background: '#1a1a1a',
+              border: '1px solid #374151',
+            }}
+          >
+            {String(children).replace(/\n$/, '')}
+          </SyntaxHighlighter>
+        );
+      }
+      
+      return (
+        <code className="bg-purple-600/20 text-purple-300 px-2 py-1 rounded-md text-sm">
+          {children}
+        </code>
+      );
+    },
+    pre: ({ children }: { children: React.ReactNode }) => {
+      return <>{children}</>;
+    },
     a: ({ href, children }: { href?: string; children: React.ReactNode }) => (
       <a 
         href={href} 
@@ -161,6 +186,7 @@ export default async function BlogPost({ params }: PageProps) {
 
   return (
     <>
+      <ScrollToAnchor />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
