@@ -138,14 +138,19 @@ export default async function BlogPost({ params }: PageProps) {
       </a>
     ),
     ul: ({ children }: { children: React.ReactNode }) => (
-      <ul className="list-disc list-inside mb-4 space-y-2 text-gray-300">
+      <ul className="list-disc mb-4 space-y-2 text-gray-300 ml-4 sm:ml-6 pl-2 sm:pl-4">
         {children}
       </ul>
     ),
     ol: ({ children }: { children: React.ReactNode }) => (
-      <ol className="list-decimal list-inside mb-4 space-y-2 text-gray-300">
+      <ol className="list-decimal mb-4 space-y-2 text-gray-300 ml-4 sm:ml-6 pl-2 sm:pl-4">
         {children}
       </ol>
+    ),
+    li: ({ children }: { children: React.ReactNode }) => (
+      <li className="mb-2 leading-relaxed">
+        {children}
+      </li>
     ),
     blockquote: ({ children }: { children: React.ReactNode }) => (
       <blockquote className="border-l-4 border-purple-500 pl-4 mb-6 italic text-gray-300">
