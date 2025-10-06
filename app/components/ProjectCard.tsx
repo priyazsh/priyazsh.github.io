@@ -41,13 +41,13 @@ export default function ProjectCard({
             <motion.div 
               whileHover={{ 
                 scale: 1.08,
-                boxShadow: "0 0 12px rgba(147, 51, 234, 0.5)" 
+                boxShadow: "0 0 12px rgba(59, 130, 246, 0.5)" 
               }} 
               whileTap={{ scale: 0.92 }}
               className="overflow-hidden rounded-md"
             >
               <Link href={sourceUrl} target="_blank" rel="noopener noreferrer" 
-                    className="flex items-center justify-center w-9 h-9 bg-gradient-to-br from-purple-600 to-purple-800 hover:from-purple-500 hover:to-purple-700 transition-all duration-300 shadow-md">
+                    className="flex items-center justify-center w-9 h-9 bg-gradient-to-br from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 transition-all duration-300 shadow-md">
                 <LuGithub size={18} className="text-white drop-shadow-md" />
               </Link>
             </motion.div>
@@ -55,13 +55,13 @@ export default function ProjectCard({
           <motion.div 
             whileHover={{ 
               scale: 1.08,
-              boxShadow: "0 0 12px rgba(20, 184, 166, 0.5)" 
+              boxShadow: "0 0 12px rgba(251, 146, 60, 0.5)" 
             }} 
             whileTap={{ scale: 0.92 }}
             className="overflow-hidden rounded-md"
           >
             <Link href={liveUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center justify-center w-9 h-9 bg-gradient-to-br from-teal-500 to-teal-700 hover:from-teal-400 hover:to-teal-600 transition-all duration-300 shadow-md">
+                  className="flex items-center justify-center w-9 h-9 bg-gradient-to-br from-orange-400 to-pink-500 hover:from-orange-300 hover:to-pink-400 transition-all duration-300 shadow-md">
               <LuExternalLink size={18} className="text-white drop-shadow-md" />
             </Link>
           </motion.div>

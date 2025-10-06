@@ -144,7 +144,7 @@ export default async function BlogPost({ params }: PageProps) {
       }
       
       return (
-        <code className="bg-purple-600/20 text-purple-300 px-2 py-1 rounded-md text-sm">
+        <code className="bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded-md text-sm">
           {children}
         </code>
       );
@@ -155,7 +155,7 @@ export default async function BlogPost({ params }: PageProps) {
     a: ({ href, children }: { href?: string; children: React.ReactNode }) => (
       <a 
         href={href} 
-        className="text-purple-400 hover:text-purple-300 transition-colors underline"
+        className="text-cyan-400 hover:text-cyan-300 transition-colors underline"
         target={href?.startsWith('http') ? '_blank' : undefined}
         rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
       >

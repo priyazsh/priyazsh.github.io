@@ -43,7 +43,7 @@ export default function HeadingAnchor({ level, children, className = '' }: Headi
   const linkElement = (
     <Link
       href={`#${id}`}
-      className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute -left-6 top-0 flex items-center justify-center w-5 h-full text-gray-400 hover:text-purple-400"
+      className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute -left-6 top-0 flex items-center justify-center w-5 h-full text-gray-400 hover:text-cyan-400"
       aria-label={`Link to ${text}`}
       onClick={(e) => {
         e.preventDefault();
