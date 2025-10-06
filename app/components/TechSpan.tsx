@@ -1,9 +1,5 @@
 import { 
-  SiReact, 
-  SiTypescript, 
-  SiNodedotjs,
-  SiNextdotjs,
-  SiPython 
+  SiNextdotjs
 } from "react-icons/si";
 import { IoLogoJavascript } from "react-icons/io5";
 import { FaJava } from "react-icons/fa";

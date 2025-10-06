@@ -5,7 +5,7 @@ import Socials from "./components/socials";
 import ProjectCard from "./components/ProjectCard";
 import TechSpan from "./components/TechSpan";
 import { motion } from "framer-motion";
-import { kodeMono, cabin, epilogue } from "./utils/fonts";
+import { kodeMono, epilogue } from "./utils/fonts";
 import {
   textStyles,
   containerStyles,

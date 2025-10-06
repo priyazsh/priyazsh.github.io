@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { 
   containerStyles,
   BackButton,
-  textStyles,
   Footer
 } from '../components/ui';
 import BlogPostCard from '../components/BlogPostCard';

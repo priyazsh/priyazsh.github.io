@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import { cabin } from '../utils/fonts';
 import { 
   containerStyles,
   BackButton,

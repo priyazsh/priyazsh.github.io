@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { LuShare2, LuCopy, LuCheck, LuTwitter, LuLinkedin, LuLink } from 'react-icons/lu';
+import { LuShare2, LuCopy, LuCheck, LuTwitter, LuLinkedin } from 'react-icons/lu';
 
 interface SocialShareProps {
   title: string;
