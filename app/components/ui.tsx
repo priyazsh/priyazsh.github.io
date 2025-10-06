@@ -39,7 +39,7 @@ export const motionVariants = {
 
 export const containerStyles = {
   main: "bg-neutral-950 relative",
-  content: "md:w-[510px] md:mx-auto mx-auto md:mt-10 text-white p-4 relative z-10",
+  content: "md:w-[32vw] lg:w-[30vw] xl:w-[28vw] md:mx-auto mx-auto md:mt-10 text-white p-4 relative z-10",
   card: "bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg",
   wideContent: "w-full max-w-4xl",
 };
