@@ -47,7 +47,7 @@ export default function ProjectCard({
               className="overflow-hidden rounded-md"
             >
               <Link href={sourceUrl} target="_blank" rel="noopener noreferrer" 
-                    className="flex items-center justify-center w-9 h-9 bg-gradient-to-br from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 transition-all duration-300 shadow-md">
+                    className="flex items-center justify-center w-9 h-9 bg-gradient-to-br from-gray-700 via-gray-800 to-black hover:from-gray-600 hover:via-gray-700 hover:to-gray-900 transition-all duration-300 shadow-lg">
                 <LuGithub size={18} className="text-white drop-shadow-md" />
               </Link>
             </motion.div>
@@ -55,13 +55,13 @@ export default function ProjectCard({
           <motion.div 
             whileHover={{ 
               scale: 1.08,
-              boxShadow: "0 0 12px rgba(251, 146, 60, 0.5)" 
+              boxShadow: "0 0 12px rgba(239, 68, 68, 0.5)" 
             }} 
             whileTap={{ scale: 0.92 }}
             className="overflow-hidden rounded-md"
           >
             <Link href={liveUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center justify-center w-9 h-9 bg-gradient-to-br from-orange-400 to-pink-500 hover:from-orange-300 hover:to-pink-400 transition-all duration-300 shadow-md">
+                  className="flex items-center justify-center w-9 h-9 bg-gradient-to-br from-red-500 via-red-600 to-red-700 hover:from-red-400 hover:via-red-500 hover:to-red-600 transition-all duration-300 shadow-lg">
               <LuExternalLink size={18} className="text-white drop-shadow-md" />
             </Link>
           </motion.div>

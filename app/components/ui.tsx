@@ -6,9 +6,9 @@ import { ReactNode } from 'react';
 import { cabin, epilogue } from '../utils/fonts';
 
 export const buttonStyles = {
-  gradientPurpleBlue: "bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 transition-all duration-300",
-  gradientPurple: "bg-gradient-to-br from-violet-500 to-purple-600 hover:from-violet-400 hover:to-purple-500 transition-all duration-300",
-  gradientTeal: "bg-gradient-to-br from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 transition-all duration-300",
+  gradientPurpleBlue: "bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 hover:from-blue-500 hover:via-blue-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-blue-500/25",
+  gradientPurple: "bg-gradient-to-br from-orange-500 via-red-500 to-rose-500 hover:from-orange-400 hover:via-red-400 hover:to-rose-400 transition-all duration-300 shadow-lg hover:shadow-red-500/25",
+  gradientTeal: "bg-gradient-to-br from-emerald-400 via-cyan-500 to-blue-500 hover:from-emerald-300 hover:via-cyan-400 hover:to-blue-400 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25",
 };
 
 export const textStyles = {
