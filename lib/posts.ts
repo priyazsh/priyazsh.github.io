@@ -4,6 +4,13 @@ import matter from 'gray-matter';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
+function calculateReadTime(content: string): string {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return `${minutes} min read`;
+}
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -31,19 +38,20 @@ export function getAllPosts(): BlogPostMetadata[] {
       const slug = fileName.replace(/\.mdx$/, '');
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const { data } = matter(fileContents);
+      const { data, content } = matter(fileContents);
+
+      const readTime = data.readTime || calculateReadTime(content);
 
       return {
         slug,
         title: data.title,
         excerpt: data.excerpt,
         date: data.date,
-        readTime: data.readTime,
+        readTime,
         tags: data.tags || [],
       };
     });
 
-  // Sort posts by date
   return allPostsData.sort((a, b) => (new Date(a.date) > new Date(b.date) ? -1 : 1));
 }
 
@@ -53,12 +61,14 @@ export function getPostBySlug(slug: string): BlogPost | null {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 
+    const readTime = data.readTime || calculateReadTime(content);
+
     return {
       slug,
       title: data.title,
       excerpt: data.excerpt,
       date: data.date,
-      readTime: data.readTime,
+      readTime,
       tags: data.tags || [],
       content,
     };
