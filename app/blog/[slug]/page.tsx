@@ -15,6 +15,7 @@ import { generateArticleJsonLd, generateBreadcrumbJsonLd } from '../../../lib/st
 import HeadingAnchor from '../../components/HeadingAnchor';
 import ScrollToAnchor from '../../components/ScrollToAnchor';
 import SocialShare from '../../components/SocialShare';
+import CodeBlock from '../../components/CodeBlock';
 
 interface PageProps {
   params: Promise<{
@@ -128,19 +129,9 @@ export default async function BlogPost({ params }: PageProps) {
       
       if (language) {
         return (
-          <SyntaxHighlighter
-            style={oneDark}
-            language={language}
-            PreTag="div"
-            className="rounded-lg mb-6 text-sm"
-            customStyle={{
-              margin: 0,
-              background: '#1a1a1a',
-              border: '1px solid #374151',
-            }}
-          >
+          <CodeBlock language={language}>
             {String(children).replace(/\n$/, '')}
-          </SyntaxHighlighter>
+          </CodeBlock>
         );
       }
       
