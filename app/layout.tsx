@@ -73,6 +73,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const analytics = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+  
   return (
     <html lang="en">
       <head>
@@ -80,7 +82,7 @@ export default function RootLayout({
       <body className="antialiased">
         <div id="root">{children}</div>
         <ScrollToTop />
-        <GoogleAnalytics gaId="G-LM2B0KC5LB" />
+        {analytics && <GoogleAnalytics gaId={analytics} />}
       </body>
     </html>
   );
