@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Socials from "./components/socials";
+import Socials from "./components/Socials";
 import ProjectCard from "./components/ProjectCard";
 import TechSpan from "./components/TechSpan";
 import { motion } from "framer-motion";
@@ -14,7 +14,7 @@ import {
   FileTextIcon,
   BlogIcon,
   Footer,
-} from "./components/ui";
+} from "./components/Ui";
 import { generatePersonJsonLd, generateWebsiteJsonLd } from "@/lib/structured-data";
 import ParticleBackground from "./components/ParticleBackground";
 

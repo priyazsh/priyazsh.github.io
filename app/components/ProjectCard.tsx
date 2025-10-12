@@ -4,7 +4,7 @@ import Link from "next/link";
 import { LuGithub, LuExternalLink } from "react-icons/lu";
 import { motion } from "framer-motion";
 import { cabin } from '../utils/fonts';
-import { textStyles, containerStyles } from './ui';
+import { textStyles, containerStyles } from './Ui';
 
 interface ProjectCardProps {
   title: string;

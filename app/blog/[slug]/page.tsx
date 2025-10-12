@@ -7,7 +7,7 @@ import {
   BackButton,
   textStyles,
   Footer
-} from '../../components/ui';
+} from '../../components/Ui';
 import { getPostBySlug, getAllPostSlugs } from '../../../lib/posts';
 import { generateArticleJsonLd, generateBreadcrumbJsonLd } from '../../../lib/structured-data';
 import HeadingAnchor from '../../components/HeadingAnchor';

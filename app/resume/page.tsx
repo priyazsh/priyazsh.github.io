@@ -6,7 +6,7 @@ import {
   GradientButton,
   DownloadIcon,
   Footer
-} from '../components/ui';
+} from '../components/Ui';
 
 export default function Resume() {
   return (

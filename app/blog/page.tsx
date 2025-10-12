@@ -3,7 +3,7 @@ import {
   containerStyles,
   BackButton,
   Footer
-} from '../components/ui';
+} from '../components/Ui';
 import BlogPostCard from '../components/BlogPostCard';
 import { getAllPosts } from '../../lib/posts';
 import { generateBlogJsonLd, generateBreadcrumbJsonLd } from '../../lib/structured-data';

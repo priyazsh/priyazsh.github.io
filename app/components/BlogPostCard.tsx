@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { cabin, epilogue } from '../utils/fonts';
-import { textStyles, containerStyles } from './ui';
+import { textStyles, containerStyles } from './Ui';
 
 interface BlogPostCardProps {
   id: number;
