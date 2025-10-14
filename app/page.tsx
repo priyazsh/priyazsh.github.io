@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import Socials from "./components/Socials";
 import ProjectCard from "./components/ProjectCard";
 import TechSpan from "./components/TechSpan";
@@ -107,31 +108,23 @@ export default function Home() {
         </motion.p>
 
         <motion.div 
-          className="mb-6 flex items-center flex-wrap"
+          className={`mb-4 ${textStyles.description}`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
         >
-          <p className={`mr-2 text-gray-200 text-base ${epilogue.className}`}>
-            building stuff with
-          </p>
+          building stuff with{" "}
           {technologies.map((tech, index) => (
-            <motion.div
-              key={tech}
-              className={`${containerStyles.card} px-2 py-0.5 flex items-center mr-1.5 mb-1.5 hover:bg-gray-800/30 transition-all shadow-sm cursor-default`}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ 
-                duration: 0.3, 
-                delay: 0.8 + (index * 0.1), 
-                ease: "backOut" 
-              }}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <TechSpan>{tech}</TechSpan>
-            </motion.div>
+            <span key={tech} className="inline-flex items-center">
+              <span className={`${containerStyles.card} px-2 py-0.5 inline-flex items-center mr-1.5 hover:bg-gray-800/30 transition-all shadow-sm text-sm`}>
+                <TechSpan>{tech}</TechSpan>
+              </span>
+              {index === technologies.length - 2 && " & "}
+              {index < technologies.length - 2 && " ,"}
+            </span>
           ))}
+          <br />
+          btw i&apos;ve started writing <Link href="/blog" className="text-blue-400 hover:text-blue-300 visited:text-blue-400 transition-colors">blogs</Link>, checkout!
         </motion.div>
 
         <motion.div
