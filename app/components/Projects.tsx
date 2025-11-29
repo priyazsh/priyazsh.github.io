@@ -21,9 +21,11 @@ export default function Projects() {
       </h2>
 
       {projects.map((project: Project) => (
-        <div
+        <Link
           key={project.title}
-          className="p-6 rounded-xl border border-zinc-800/50 hover:border-zinc-600 transition-colors bg-zinc-900/30"
+          href={project.url.live}
+          target="_blank"
+          className="block p-6 rounded-xl border border-zinc-800/50 hover:border-zinc-600 transition-colors bg-zinc-900/30"
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -42,30 +44,22 @@ export default function Projects() {
               </span>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex items-center gap-3">
               {project.url.git && (
-                <Link
-                  href={project.url.git}
-                  target="_blank"
-                  className="p-2 rounded-lg hover:bg-zinc-800 transition"
-                >
+                <span className="p-2 rounded-lg hover:bg-zinc-700 transition-colors">
                   <LuGithub size={18} />
-                </Link>
+                </span>
               )}
 
-              <Link
-                href={project.url.live}
-                target="_blank"
-                className="p-2 rounded-lg hover:bg-zinc-800 transition"
-              >
+              <span className="p-2 rounded-lg hover:bg-zinc-700 transition-colors">
                 <LuExternalLink size={18} />
-              </Link>
+              </span>
             </div>
           </div>
 
-          <p className="text-sm text-zinc-400 mt-3">{project.description}</p>
-          <p className="text-xs text-zinc-500 mt-1">{project.tech}</p>
-        </div>
+          <p className="text-sm text-zinc-400 mt-3 leading-relaxed">{project.description}</p>
+          <p className="text-xs text-zinc-500 mt-2">{project.tech}</p>
+        </Link>
       ))}
     </section>
   );

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LuCalendar, LuClock, LuTag, LuExternalLink } from "react-icons/lu";
+import { LuCalendar, LuClock, LuTag } from "react-icons/lu";
 import fs from "fs";
 import path from "path";
 
@@ -97,10 +97,12 @@ export default function Blogs() {
       </h2>
 
       {blogPosts.map((post) => (
-        <div
+        <Link
           key={post.slug}
-          className="p-4 sm:p-6 rounded-xl border border-zinc-800/50 hover:border-zinc-600 transition-colors bg-zinc-900/30"
+          href={`/blog/${post.slug}`}
+          className="block p-4 sm:p-6 rounded-xl border border-zinc-800/50 hover:border-zinc-600 transition-colors bg-zinc-900/30 active:scale-[0.98] sm:active:scale-[0.99]"
         >
+        <div>
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2 mb-3 sm:mb-4">
             <h3 className="text-base sm:text-lg font-display font-semibold tracking-tight">
               {post.title}
@@ -142,15 +144,10 @@ export default function Blogs() {
               <div></div>
             )}
 
-            <Link
-              href={`/blog/${post.slug}`}
-              className="inline-flex items-center gap-1 text-gray-400 hover:text-gray-200 font-medium transition-colors duration-300 text-sm w-fit"
-            >
-              <span>Read</span>
-              <span>→</span>
-            </Link>
+
           </div>
         </div>
+        </Link>
       ))}
 
       <div className="pt-3 sm:pt-4">
