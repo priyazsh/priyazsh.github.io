@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import Oneko from "./components/Oneko";
 import { GoogleAnalytics } from "@next/third-parties/google"
+import { inter, jetbrainsMono, geist } from '../lib/fonts'
 import "./globals.css"
 
 export const viewport: Viewport = {
@@ -72,8 +73,8 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const analytics = process.env.GOOGLE_ANALYTICS ?? "";
   return (
-    <html lang="en">
-      <body className={`antialiased`}>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} ${geist.variable}`}>
+      <body className={`${inter.className} antialiased`}>
         <Oneko />
         <div className="text-white w-full max-w-2xl lg:max-w-lg xl:max-w-2xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
           {children}

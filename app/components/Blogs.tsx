@@ -92,8 +92,8 @@ export default function Blogs() {
 
   return (
     <section className="space-y-4 sm:space-y-6 mt-6 sm:mt-8">
-      <h2 className="text-lg sm:text-xl font-semibold tracking-tight border-b border-zinc-800 pb-2 sm:pb-3 mb-3 sm:mb-4">
-        ~/ Blogs
+      <h2 className="text-lg sm:text-xl font-display font-semibold tracking-tight border-b border-zinc-800 pb-2 sm:pb-3 mb-3 sm:mb-4">
+        <span className="text-gray-500 font-mono">~/</span> Blogs
       </h2>
 
       {blogPosts.map((post) => (
@@ -102,7 +102,7 @@ export default function Blogs() {
           className="p-4 sm:p-6 rounded-xl border border-zinc-800/50 hover:border-zinc-600 transition-colors bg-zinc-900/30"
         >
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2 mb-3 sm:mb-4">
-            <h3 className="text-base sm:text-lg font-semibold tracking-tight">
+            <h3 className="text-base sm:text-lg font-display font-semibold tracking-tight">
               {post.title}
             </h3>
 

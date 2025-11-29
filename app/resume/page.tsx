@@ -3,6 +3,8 @@ import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
 import Footer from "../components/Footer";
 
+export const dynamic = 'force-static';
+
 export const metadata: Metadata = {
   title: "Resume",
   openGraph: {
@@ -24,7 +26,7 @@ export default function Resume() {
         </Link>
       </div>
 
-      <h1 className="text-2xl font-bold">My Resume</h1>
+      <h1 className="text-2xl font-display font-bold">My Resume</h1>
 
       <div className="relative w-full bg-white/5" style={{ height: "80vh" }}>
         <iframe

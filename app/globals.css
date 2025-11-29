@@ -1,16 +1,52 @@
 @import "tailwindcss";
 
+:root {
+  --font-inter: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-jetbrains-mono: 'JetBrains Mono', 'SF Mono', Monaco, Inconsolata, 'Fira Code', 'Droid Sans Mono', monospace;
+  --font-geist: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   background-color: #0A0A0A;
-  font-feature-settings: "rlig" 1, "calt" 1;
+  font-family: var(--font-inter);
+  font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1, "ss02" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
+/* Font utilities */
+.font-display {
+  font-family: var(--font-geist);
+  font-feature-settings: "ss01" 1, "ss02" 1, "cv01" 1, "cv02" 1;
+}
+
+.font-mono {
+  font-family: var(--font-jetbrains-mono);
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+/* Enhanced code styling */
+code {
+  font-family: var(--font-jetbrains-mono) !important;
+  font-variant-ligatures: common-ligatures;
+}
+
+pre code {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Better link styling */
+a {
+  transition: all 200ms ease-in-out;
+}
+
+/* Mobile touch targets */
 @media (max-width: 640px) {
   button, a {
     min-height: 44px;

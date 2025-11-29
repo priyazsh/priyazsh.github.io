@@ -16,8 +16,8 @@ interface Project {
 export default function Projects() {
   return (
     <section className="space-y-6 mt-8">
-      <h2 className="text-xl font-semibold tracking-tight border-b border-zinc-800 pb-3 mb-4 ">
-        ~/ Projects
+      <h2 className="text-xl font-display font-semibold tracking-tight border-b border-zinc-800 pb-3 mb-4">
+        <span className="text-gray-500 font-mono">~/</span> Projects
       </h2>
 
       {projects.map((project: Project) => (
@@ -27,7 +27,7 @@ export default function Projects() {
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <h3 className="text-lg font-semibold tracking-tight">
+              <h3 className="text-lg font-display font-semibold tracking-tight">
                 {project.title}
               </h3>
 

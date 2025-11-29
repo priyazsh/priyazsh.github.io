@@ -6,6 +6,8 @@ import fs from "fs";
 import path from "path";
 import Footer from "../components/Footer";
 
+export const dynamic = 'force-static';
+
 export const metadata: Metadata = {
   title: "Blog",
   description: "",
@@ -113,8 +115,8 @@ export default async function Blog() {
         <span>Back</span>
       </Link>
       
-      <h2 className="text-lg sm:text-xl font-semibold tracking-tight border-b border-zinc-800 pb-2 sm:pb-3 mb-3 sm:mb-4">
-        ~/ Blog
+      <h2 className="text-lg sm:text-xl font-display font-semibold tracking-tight border-b border-zinc-800 pb-2 sm:pb-3 mb-3 sm:mb-4">
+        <span className="text-gray-500 font-mono">~/</span> Blog
       </h2>
 
       {blogPosts.map((post) => (
@@ -125,7 +127,7 @@ export default async function Blog() {
         >
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-              <h3 className="text-base sm:text-lg font-semibold tracking-tight">
+              <h3 className="text-base sm:text-lg font-display font-semibold tracking-tight">
                 {post.title}
               </h3>
 

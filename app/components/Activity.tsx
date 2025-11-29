@@ -27,8 +27,8 @@ export default function Activity() {
     <section className="space-y-4 sm:space-y-6 mt-8 sm:mt-10">
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-        <h2 className="text-lg sm:text-xl font-semibold tracking-tight border-b border-zinc-800 pb-2 flex-1">
-          ~/ GitHub Activity
+        <h2 className="text-lg sm:text-xl font-display font-semibold tracking-tight border-b border-zinc-800 pb-2 flex-1">
+          <span className="text-gray-500 font-mono">~/</span> GitHub Activity
         </h2>
         <p className="text-sm text-zinc-400 mb-2 sm:mb-4">
           {total !== null ? total : "…"} contributions

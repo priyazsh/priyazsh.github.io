@@ -5,6 +5,8 @@ import { LuCalendar, LuClock, LuTag, LuArrowLeft } from "react-icons/lu";
 import { Metadata } from "next";
 import Footer from "@/app/components/Footer";
 
+export const dynamic = 'force-static';
+
 interface BlogPostProps {
   params: Promise<{ url: string }>;
 }
@@ -57,9 +59,9 @@ function markdownToHtml(markdown: string): string {
   let html = markdown;
 
   // Headers
-  html = html.replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold text-zinc-200 mt-8 mb-4 pb-2 border-b border-zinc-800/50">$1</h3>');
-  html = html.replace(/^## (.*$)/gim, '<h2 class="text-xl font-semibold text-zinc-100 mt-10 mb-5 pb-3 border-b border-zinc-700">$1</h2>');
-  html = html.replace(/^# (.*$)/gim, '<h1 class="text-2xl font-semibold text-white mt-10 mb-6 pb-3 border-b-2 border-zinc-600">$1</h1>');
+  html = html.replace(/^### (.*$)/gim, '<h3 class="text-lg font-display font-semibold text-zinc-200 mt-8 mb-4 pb-2 border-b border-zinc-800/50">$1</h3>');
+  html = html.replace(/^## (.*$)/gim, '<h2 class="text-xl font-display font-semibold text-zinc-100 mt-10 mb-5 pb-3 border-b border-zinc-700">$1</h2>');
+  html = html.replace(/^# (.*$)/gim, '<h1 class="text-2xl font-display font-semibold text-white mt-10 mb-6 pb-3 border-b-2 border-zinc-600">$1</h1>');
 
   // Text formatting
   html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>');
@@ -129,6 +131,39 @@ async function getBlogPost(slug: string) {
   }
 }
 
+// Generate static params for all blog posts
+export async function generateStaticParams() {
+  try {
+    const postsDirectory = path.join(process.cwd(), "posts");
+    const filenames = fs.readdirSync(postsDirectory);
+    
+    return filenames
+      .filter(name => name.endsWith('.mdx'))
+      .map(name => ({
+        url: name.replace('.mdx', '')
+      }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
+}
+
+function extractFirstImage(content: string): string | null {
+  const imagePatterns = [
+    /!\[([^\]]*)\]\(([^)]*)\)/,  // ![alt](url)
+    /\[!\[([^\]]*)\]\(([^)]*)\)\]\(([^)]*)\)/ // [![alt](url)](link)
+  ];
+
+  for (const pattern of imagePatterns) {
+    const match = content.match(pattern);
+    if (match) {
+      return match[2];
+    }
+  }
+  
+  return null;
+}
+
 export async function generateMetadata({
   params,
 }: BlogPostProps): Promise<Metadata> {
@@ -141,9 +176,40 @@ export async function generateMetadata({
     };
   }
 
+  const firstImage = extractFirstImage(post.content);
+  const baseUrl = 'https://priyanzsh.github.io';
+
   return {
     title: post.title,
     description: post.desc,
+    openGraph: {
+      title: post.title,
+      description: post.desc,
+      type: 'article',
+      publishedTime: post.date,
+      url: `${baseUrl}/blog/${url}`,
+      images: firstImage ? [
+        {
+          url: firstImage.startsWith('http') ? firstImage : `${baseUrl}${firstImage}`,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        }
+      ] : [
+        {
+          url: `${baseUrl}/og/card.png`, // Fallback image
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        }
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.desc,
+      images: firstImage ? [firstImage.startsWith('http') ? firstImage : `${baseUrl}${firstImage}`] : [`${baseUrl}/og/card.png`],
+    },
   };
 }
 
@@ -160,7 +226,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
         </Link>
 
         <div className="text-center py-16">
-          <h1 className="text-2xl font-bold text-white mb-4">Post Not Found</h1>
+          <h1 className="text-2xl font-display font-bold text-white mb-4">Post Not Found</h1>
           <p className="text-zinc-400">The blog post you're looking for doesn't exist.</p>
         </div>
       </div>
@@ -180,8 +246,8 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
       <article className="space-y-8">
         <header className="space-y-4">
-          <h1 className="text-3xl font-bold text-white">{post.title}</h1>
-          <p className="text-lg text-zinc-400">{post.desc}</p>
+          <h1 className="text-3xl font-display font-bold text-white tracking-tight">{post.title}</h1>
+          <p className="text-lg text-zinc-400 font-sans leading-relaxed">{post.desc}</p>
 
           <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-500">
             <div className="flex items-center gap-4">
@@ -212,7 +278,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
         </header>
 
         <div 
-          className="text-zinc-400 leading-relaxed"
+          className="text-zinc-400 leading-relaxed font-sans prose prose-invert max-w-none"
           dangerouslySetInnerHTML={{ __html: htmlContent }} 
         />
       </article>
