@@ -11,8 +11,8 @@ export default function Intro() {
           <Image
             src="/priyansh.jpg"
             alt="Priyansh Prajapat"
-            width={200}
-            height={200}
+            width={80}
+            height={80}
             className="object-cover w-full h-full"
           />
         </div>
