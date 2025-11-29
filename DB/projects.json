@@ -1,0 +1,22 @@
+[
+  {
+    "title": "is-a.software",
+    "description": "A subdomain service for developers to use in their projects, providing free and easy-to-configure subdomains for developer projects.",
+    "tech": "Next.js, GitHub Actions",
+    "url": {
+      "git": "https://github.com/is-a-software/is-a-software",
+      "live": "https://is-a.software"
+    },
+    "status": true
+  },
+  {
+    "title": "DevProfiles",
+    "description": "A platform to list your developer profile and showcase your skills to the world. Connect with other developers and build your network.",
+    "tech": "JavaScript",
+    "url": {
+      "git": "https://github.com/priyanzsh/DevProfiles",
+      "live": "https://devprofiles.is-a.software"
+    },
+    "status": true
+  }
+]

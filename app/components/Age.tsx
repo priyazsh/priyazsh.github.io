@@ -1,28 +1,25 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
-export default function AgeCalculator() {
-  const [age, setAge] = useState<string>("");
+export default function Age() {
 
-  useEffect(() => {
-    const dob = new Date("2004-05-28");
+    const [age, setAge] = useState<string>("21");
 
-    const updateAge = () => {
-      const now = new Date();
-      const msPerDay = 1000 * 60 * 60 * 24;
-      const diffDays = (now.getTime() - dob.getTime()) / msPerDay;
-      const years = diffDays / 365.2425;
-      setAge(years.toFixed(9));
-    };
+    useEffect(() => {
+        const dob = new Date("2004-05-28")
+        const updateAge = () => {
+            const rn = new Date()
+            const msperDay = 1000*60*60*24
+            const gap = (rn.getTime() - dob.getTime())/msperDay
+            const years = gap/365.2425
+            setAge(years.toFixed(9))
+        }
+        const interval = setInterval(updateAge, 1)
+        return () => clearInterval(interval)
+    },[])
 
-    updateAge(); 
-    const interval = setInterval(updateAge, 1); 
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-      <span className="font-mono text-white">{age}</span>
-  );
+    return (
+        <span className="font-mono">{age}</span>
+    )
 }

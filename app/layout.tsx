@@ -1,31 +1,20 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import ScrollToTop from "./components/ScrollToTop";
+import type { Metadata, Viewport } from "next"
+import Oneko from "./components/Oneko";
+import { GoogleAnalytics } from "@next/third-parties/google"
+import "./globals.css"
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://oyepriyansh.github.io"),
+  metadataBase: new URL("https://priyanzsh.github.io"),
   title: {
     default: "Priyansh Prajapat",
     template: "%s | Priyansh Prajapat",
   },
   description: "Full stack developer from India",
-  keywords: [
-    "Priyansh Prajapat",
-    "Portfolio",
-    "Projects",
-    "JavaScript",
-    "Next.js",
-    "Java",
-    "Web Developer",
-    "Self-taught",
-    "Full Stack Developer",
-  ],
-  authors: [
-    { name: "Priyansh Prajapat", url: "https://oyepriyansh.github.io" },
-  ],
-  creator: "Priyansh Prajapat",
-  publisher: "Priyansh Prajapat",
   robots: {
     index: true,
     follow: true,
@@ -37,52 +26,59 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://oyepriyansh.github.io",
-    siteName: "Priyansh Prajapat",
-    title: "Priyansh Prajapat",
-    description: "Full stack developer from India",
-    images: [
-      {
-        url: "/oyepriyansh.webp",
-        width: 630,
-        height: 630,
-        alt: "Priyansh Prajapat",
-      },
+  icons: {
+    icon: [
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      { rel: "android-chrome", url: "/favicon/android-chrome-192x192.png", sizes: "192x192" },
+      { rel: "android-chrome", url: "/favicon/android-chrome-512x512.png", sizes: "512x512" },
     ],
   },
+  manifest: "/favicon/site.webmanifest",
   twitter: {
-    card: "summary",
     title: "Priyansh Prajapat",
-    description: "Full stack developer from India",
-    creator: "@oyepriyansh",
-    images: ["/oyepriyansh.webp"],
+    card: "summary_large_image",
+    creator: "@priyanzsh",
+    creatorId: "@priyanzsh",
+    site: "@priyanzsh",
+    siteId: "@priyanzsh",
+    description: "Full stack developer from India.",
+    images: ["/og/card.png"],
   },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/oyepriyansh.webp",
-  },
-  manifest: "/manifest.json",
+    openGraph: {
+      title: "Priyansh Prajapat",
+      description: "Full stack developer from India",
+      url: "https://priyanzsh.github.io",
+      images: [
+        {
+          url: "/og/card.png",
+          width: 1200,
+          height: 630,
+          alt: "Priyansh Prajapat",
+          type: "image/png",
+        },
+      ],
+    },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const analytics = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
-  
+}: Readonly<{ children: React.ReactNode }>) {
+  const analytics = process.env.GOOGLE_ANALYTICS ?? "";
   return (
     <html lang="en">
-      <head>
-      </head>
-      <body className="antialiased">
-        <div id="root">{children}</div>
-        <ScrollToTop />
-        {analytics && <GoogleAnalytics gaId={analytics} />}
+      <body className={`antialiased`}>
+        <Oneko />
+        <div className="text-white w-full max-w-2xl lg:max-w-lg xl:max-w-2xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
+          {children}
+          <GoogleAnalytics gaId={analytics} />
+        </div>
       </body>
     </html>
   );

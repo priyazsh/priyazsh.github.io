@@ -1,24 +1,7 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { LuCalendar, LuClock, LuTag, LuExternalLink } from "react-icons/lu";
-import { FaArrowLeft } from "react-icons/fa6";
 import fs from "fs";
 import path from "path";
-import Footer from "../components/Footer";
-
-export const metadata: Metadata = {
-  title: "Blog",
-  description: "",
-  openGraph: {
-    title: "Blog | Priyansh Prajapat",
-    description: "",
-    url: "https://priyanzsh.github.io/blog",
-  },
-  twitter: {
-    title: "Blog | Priyansh Prajapat",
-    description: "",
-  },
-};
 
 interface BlogPost {
   title: string;
@@ -64,10 +47,14 @@ function estimateReadTime(content: string): string {
   return `${minutes} min read`;
 }
 
-async function getBlogPosts(): Promise<BlogPost[]> {
-  const postsDirectory = path.join(process.cwd(), "posts");
-
+function getTopBlogPosts(): BlogPost[] {
   try {
+    const postsDirectory = path.join(process.cwd(), "posts");
+
+    if (!fs.existsSync(postsDirectory)) {
+      return [];
+    }
+
     const filenames = fs.readdirSync(postsDirectory);
     const posts: BlogPost[] = [];
 
@@ -91,53 +78,42 @@ async function getBlogPosts(): Promise<BlogPost[]> {
       }
     }
 
-    return posts.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
+    return posts
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 2);
   } catch (error) {
     console.error("Error reading blog posts:", error);
     return [];
   }
 }
 
-export default async function Blog() {
-  const blogPosts = await getBlogPosts();
+export default function Blogs() {
+  const blogPosts = getTopBlogPosts();
 
   return (
     <section className="space-y-4 sm:space-y-6 mt-6 sm:mt-8">
-      <Link
-        href="/"
-        className="group inline-flex items-center gap-2 text-gray-400 hover:text-white transition-all duration-300 font-medium px-3 sm:px-4 py-2 rounded-lg hover:bg-white/5 backdrop-blur-sm border border-gray-700/30 hover:border-gray-600/50 active:scale-95"
-      >
-        <FaArrowLeft className="w-3 h-3 sm:w-4 sm:h-4" />
-        <span>Back</span>
-      </Link>
-      
       <h2 className="text-lg sm:text-xl font-semibold tracking-tight border-b border-zinc-800 pb-2 sm:pb-3 mb-3 sm:mb-4">
-        ~/ Blog
+        ~/ Blogs
       </h2>
 
       {blogPosts.map((post) => (
-        <Link
+        <div
           key={post.slug}
-          href={`/blog/${post.slug}`}
-          className="block p-4 sm:p-6 rounded-xl border border-zinc-800/50 hover:border-zinc-600 transition-colors bg-zinc-900/30 active:scale-[0.98] sm:active:scale-[0.99]"
+          className="p-4 sm:p-6 rounded-xl border border-zinc-800/50 hover:border-zinc-600 transition-colors bg-zinc-900/30"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-              <h3 className="text-base sm:text-lg font-semibold tracking-tight">
-                {post.title}
-              </h3>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2 mb-3 sm:mb-4">
+            <h3 className="text-base sm:text-lg font-semibold tracking-tight">
+              {post.title}
+            </h3>
 
-              <span className="hidden sm:inline-flex px-2 py-0.5 text-xs rounded bg-black-600/20 text-red-500 w-fit">
-                {post.readTime}
-              </span>
-            </div>
+            <span className="hidden sm:inline-flex px-2 py-0.5 text-xs rounded bg-black-600/20 text-red-500 w-fit">
+              {post.readTime}
+            </span>
           </div>
 
-          <p className="text-sm text-zinc-400 mt-2 sm:mt-3 leading-relaxed">{post.desc}</p>
-          
-          <div className="flex items-center gap-4 mt-2">
+          <p className="text-sm text-zinc-400 mb-3 sm:mb-4 leading-relaxed">{post.desc}</p>
+
+          <div className="flex items-center gap-4 mb-2">
             <div className="flex items-center gap-2">
               <LuCalendar className="w-3 h-3 text-zinc-500 shrink-0" />
               <p className="text-xs text-zinc-500">{post.date}</p>
@@ -149,19 +125,42 @@ export default async function Blog() {
             </div>
           </div>
 
-          {post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1 sm:gap-2 mt-2">
-              {post.tags.map((tag) => (
-                <span key={tag} className="inline-flex items-center gap-1 text-xs text-zinc-500">
-                  <LuTag className="w-3 h-3 shrink-0" />
-                  <span>{tag}</span>
-                </span>
-              ))}
-            </div>
-          )}
-        </Link>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-2">
+            {post.tags.length > 0 ? (
+              <div className="flex flex-wrap gap-1 sm:gap-2">
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center gap-1 text-xs text-zinc-500"
+                  >
+                    <LuTag className="w-3 h-3 shrink-0" />
+                    <span>{tag}</span>
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <div></div>
+            )}
+
+            <Link
+              href={`/blog/${post.slug}`}
+              className="inline-flex items-center gap-1 text-gray-400 hover:text-gray-200 font-medium transition-colors duration-300 text-sm w-fit"
+            >
+              <span>Read</span>
+              <span>→</span>
+            </Link>
+          </div>
+        </div>
       ))}
-      <Footer />
+
+      <div className="pt-3 sm:pt-4">
+        <Link
+          href="/blog"
+          className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700 hover:border-zinc-600 transition-all duration-300 text-sm font-medium text-zinc-300 hover:text-white active:scale-95"
+        >
+          <span>show all posts</span>
+        </Link>
+      </div>
     </section>
   );
 }
