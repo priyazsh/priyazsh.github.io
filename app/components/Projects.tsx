@@ -1,3 +1,4 @@
+"use client";
 import projects from "@/DB/projects.json";
 import Link from "next/link";
 import { LuGithub, LuExternalLink } from "react-icons/lu";
@@ -35,25 +36,37 @@ export default function Projects() {
 
               <span
                 className={`px-2 py-0.5 text-xs rounded ${
-                  project.status
-                    ? "bg-green-600/20 text-green-400"
-                    : "bg-red-600/20 text-red-400"
+                  project.status ? "bg-green-600/20 text-green-400" : "bg-red-600/20 text-red-400"
                 }`}
               >
-                {project.status ? "Active" : "Inactive"}
+                {project.status ? "Active" : "Building"}
               </span>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+
               {project.url.git && (
-                <span className="p-2 rounded-lg hover:bg-zinc-700 transition-colors">
+                <Link
+                  href={project.url.git}
+                  target="_blank"
+                  onClick={(e) => e.stopPropagation()}
+                  className="p-2 rounded-lg hover:bg-zinc-700 transition-colors"
+                  rel="noreferrer"
+                >
                   <LuGithub size={18} />
-                </span>
+                </Link>
               )}
 
-              <span className="p-2 rounded-lg hover:bg-zinc-700 transition-colors">
+              <Link
+                href={project.url.live}
+                target="_blank"
+                onClick={(e) => e.stopPropagation()}
+                className="p-2 rounded-lg hover:bg-zinc-700 transition-colors"
+                rel="noreferrer"
+              >
                 <LuExternalLink size={18} />
-              </span>
+              </Link>
+
             </div>
           </div>
 
