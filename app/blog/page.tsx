@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Blog | Priyansh Prajapat",
     description: "",
-    url: "https://priyanzsh.github.io/blog",
+    url: "https://priyazsh.github.io/blog",
   },
   twitter: {
     title: "Blog | Priyansh Prajapat",

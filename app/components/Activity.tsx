@@ -8,7 +8,7 @@ export default function Activity() {
   useEffect(() => {
     async function load() {
       const r = await fetch(
-        "https://github-contributions-api.deno.dev/priyanzsh.json?flat=true"
+        "https://github-contributions-api.deno.dev/priyazsh.json?flat=true"
       );
       const j = await r.json();
       setTotal(j.totalContributions);
@@ -36,7 +36,7 @@ export default function Activity() {
       </div>
       <div className="overflow-x-auto activity-scroll-container">
         <Image
-          src="https://github-contributions-api.deno.dev/priyanzsh.svg?bg=0d1117&font-color=c9d1d9&no-total=true&no-legend=true"
+          src="https://github-contributions-api.deno.dev/priyazsh.svg?bg=0d1117&font-color=c9d1d9&no-total=true&no-legend=true"
           alt="GitHub Contribution Graph"
           width={800}
           height={200}

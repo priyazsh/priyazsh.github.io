@@ -10,7 +10,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://priyanzsh.github.io"),
+  metadataBase: new URL("https://priyazsh.github.io"),
   title: {
     default: "Priyansh Prajapat",
     template: "%s | Priyansh Prajapat",
@@ -45,17 +45,17 @@ export const metadata: Metadata = {
   twitter: {
     title: "Priyansh Prajapat",
     card: "summary_large_image",
-    creator: "@priyanzsh",
-    creatorId: "@priyanzsh",
-    site: "@priyanzsh",
-    siteId: "@priyanzsh",
+    creator: "@priyazsh",
+    creatorId: "@priyazsh",
+    site: "@priyazsh",
+    siteId: "@priyazsh",
     description: "Full stack developer from India.",
     images: ["/og/card.png"],
   },
     openGraph: {
       title: "Priyansh Prajapat",
       description: "Full stack developer from India",
-      url: "https://priyanzsh.github.io",
+      url: "https://priyazsh.github.io",
       images: [
         {
           url: "/og/card.png",

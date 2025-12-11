@@ -19,7 +19,7 @@ export default function Intro() {
 
         <div className="flex flex-col min-w-0 flex-1">
           <h1 className="font-display font-semibold text-lg sm:text-xl truncate tracking-tight">Priyansh Prajapat</h1>
-          <p className="text-gray-500 text-xs sm:text-sm font-mono">@priyanzsh</p>
+          <p className="text-gray-500 text-xs sm:text-sm font-mono">@priyazsh</p>
           <span className="flex items-center text-green-500 text-xs sm:text-sm mt-0.5">
             <GoDotFill className="mr-1 text-green-500 shrink-0" />
             <span className="truncate">open for freelance work</span>

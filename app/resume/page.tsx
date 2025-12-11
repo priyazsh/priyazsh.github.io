@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Resume",
   openGraph: {
     title: "Resume | Priyansh Prajapat",
-    url: "https://priyanzsh.github.io/resume",
+    url: "https://priyazsh.github.io/resume",
   },
   twitter: {
     title: "Resume | Priyansh Prajapat",

@@ -177,7 +177,7 @@ export async function generateMetadata({
   }
 
   const firstImage = extractFirstImage(post.content);
-  const baseUrl = 'https://priyanzsh.github.io';
+  const baseUrl = 'https://priyazsh.github.io';
 
   return {
     title: post.title,
