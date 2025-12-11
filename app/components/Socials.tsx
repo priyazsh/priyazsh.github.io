@@ -19,7 +19,7 @@ export default function Socials() {
       label: "GitHub"
     },
     {
-      href: "https://x.com/priyazsh_",
+      href: "https://x.com/priyazsh",
       icon: LuTwitter,
       label: "Twitter"
     },
