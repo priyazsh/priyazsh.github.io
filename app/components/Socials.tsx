@@ -14,27 +14,27 @@ export default function Socials() {
 
   const Links: sLink[] = [
     {
-      href: "https://github.com/priyanzsh",
+      href: "https://github.com/priyazsh",
       icon: LuGithub,
       label: "GitHub"
     },
     {
-      href: "https://x.com/priyanzsh_",
+      href: "https://x.com/priyazsh_",
       icon: LuTwitter,
       label: "Twitter"
     },
     {
-      href: "https://linkedin.com/in/priyanzsh",
+      href: "https://linkedin.com/in/priyazsh",
       icon: LuLinkedin,
       label: "LinkedIn"
     },
     {
-      href: "https://instagram.com/priyanzsh",
+      href: "https://instagram.com/priyazsh",
       icon: LuInstagram,
       label: "Instagram"
     },
     {
-      href: "mailto:priyanzsh@hotmail.com",
+      href: "mailto:priyazsh@hotmail.com",
       icon: FaAt,
       label: "Email"
     },

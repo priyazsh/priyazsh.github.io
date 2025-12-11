@@ -14,7 +14,7 @@
     "description": "A platform to list your developer profile and showcase your skills to the world. Connect with other developers and build your network.",
     "tech": "JavaScript",
     "url": {
-      "git": "https://github.com/priyanzsh/DevProfiles",
+      "git": "https://github.com/priyazsh/DevProfiles",
       "live": "https://devprofiles.is-a.software"
     },
     "status": true
