@@ -42,6 +42,9 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/favicon/site.webmanifest",
+  alternates: {
+    canonical: "https://priyazsh.github.io",
+  },
   twitter: {
     title: "Priyansh Prajapat",
     card: "summary_large_image",

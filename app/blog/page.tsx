@@ -11,6 +11,9 @@ export const dynamic = 'force-static';
 export const metadata: Metadata = {
   title: "Blog",
   description: "",
+  alternates: {
+    canonical: "https://priyazsh.github.io/blog",
+  },
   openGraph: {
     title: "Blog | Priyansh Prajapat",
     description: "",

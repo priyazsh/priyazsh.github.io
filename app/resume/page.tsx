@@ -7,6 +7,9 @@ export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: "Resume",
+  alternates: {
+    canonical: "https://priyazsh.github.io/resume",
+  },
   openGraph: {
     title: "Resume | Priyansh Prajapat",
     url: "https://priyazsh.github.io/resume",
