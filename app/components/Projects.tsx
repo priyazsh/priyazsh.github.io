@@ -1,4 +1,3 @@
-"use client";
 import projects from "@/DB/projects.json";
 import Link from "next/link";
 import { LuGithub, LuExternalLink } from "react-icons/lu";
@@ -22,57 +21,54 @@ export default function Projects() {
       </h2>
 
       {projects.map((project: Project) => (
-        <Link
+        <div
           key={project.title}
-          href={project.url.live}
-          target="_blank"
-          className="block p-6 rounded-xl border border-zinc-800/50 hover:border-zinc-600 transition-colors bg-zinc-900/30"
+          className="relative block p-6 rounded-xl border border-zinc-800/50 hover:border-zinc-600 transition-colors bg-zinc-900/30"
         >
-          <div className="flex items-center justify-between">
+          <Link
+            href={project.url.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute inset-0 z-0"
+            aria-label={`${project.title} - View Live`}
+          />
+
+          <div className="flex items-center justify-between relative">
             <div className="flex items-center gap-3">
               <h3 className="text-lg font-display font-semibold tracking-tight">
                 {project.title}
               </h3>
 
-              <span
-                className={`px-2 py-0.5 text-xs rounded ${
-                  project.status ? "bg-green-600/20 text-green-400" : "bg-red-600/20 text-red-400"
-                }`}
-              >
+              <span className={project.status 
+                ? "px-2 py-0.5 text-xs rounded bg-green-600/20 text-green-400" 
+                : "px-2 py-0.5 text-xs rounded bg-red-600/20 text-red-400"
+              }>
                 {project.status ? "Active" : "Building"}
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
-
+            <div className="flex items-center gap-2 relative z-10">
               {project.url.git && (
                 <Link
                   href={project.url.git}
                   target="_blank"
-                  onClick={(e) => e.stopPropagation()}
+                  rel="noopener noreferrer"
+                  aria-label={`${project.title} GitHub`}
                   className="p-2 rounded-lg hover:bg-zinc-700 transition-colors"
-                  rel="noreferrer"
                 >
                   <LuGithub size={18} />
                 </Link>
               )}
 
-              <Link
-                href={project.url.live}
-                target="_blank"
-                onClick={(e) => e.stopPropagation()}
-                className="p-2 rounded-lg hover:bg-zinc-700 transition-colors"
-                rel="noreferrer"
-              >
+              <span className="p-2 rounded-lg hover:bg-zinc-700 transition-colors">
                 <LuExternalLink size={18} />
-              </Link>
-
+              </span>
             </div>
           </div>
 
-          <p className="text-sm text-zinc-400 mt-3 leading-relaxed">{project.description}</p>
-          <p className="text-xs text-zinc-500 mt-2">{project.tech}</p>
-        </Link>
+          <p className="text-sm text-zinc-400 mt-3 leading-relaxed relative">{project.description}</p>
+          <p className="text-xs text-zinc-500 mt-2 relative">{project.tech}</p>
+        </div>
       ))}
     </section>
   );
