@@ -18,5 +18,15 @@
       "live": "https://devprofiles.is-a.software"
     },
     "status": true
+  },
+  {
+    "title": "Content Blocker",
+    "description": "A chrome extension that block all content of a website except ads.",
+    "tech": "JavaScript",
+    "url": {
+      "git": "",
+      "live": ""
+    },
+    "status": false
   }
 ]
