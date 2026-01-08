@@ -154,14 +154,14 @@ export default function Comments({ slug }: CommentsProps) {
         {user ? (
           <button
             onClick={handleSignOut}
-            className="rounded-lg border border-zinc-700 px-3 py-1.5 text-sm font-medium text-white transition hover:border-zinc-500 hover:bg-white/5"
+            className="cursor-pointer rounded-lg border border-zinc-700 px-3 py-1.5 text-sm font-medium text-white transition hover:border-zinc-500 hover:bg-white/5"
           >
             Sign out
           </button>
         ) : (
           <button
             onClick={handleSignIn}
-            className="rounded-lg bg-white text-zinc-900 px-3 py-1.5 text-sm font-semibold shadow-sm transition hover:bg-zinc-100"
+            className="cursor-pointer rounded-lg bg-white text-zinc-900 px-3 py-1.5 text-sm font-semibold shadow-sm transition hover:bg-zinc-100"
           >
             Sign in with Google
           </button>
@@ -184,7 +184,7 @@ export default function Comments({ slug }: CommentsProps) {
         <button
           type="submit"
           disabled={isSubmitting || !user}
-          className="inline-flex items-center justify-center rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-60"
+          className="cursor-pointer inline-flex items-center justify-center rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {user ? (isSubmitting ? "Posting..." : "Post comment") : "Sign in to comment"}
         </button>

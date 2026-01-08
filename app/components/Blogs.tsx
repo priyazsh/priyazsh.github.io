@@ -100,7 +100,7 @@ export default function Blogs() {
         <Link
           key={post.slug}
           href={`/blog/${post.slug}`}
-          className="block p-4 sm:p-6 rounded-xl border border-zinc-800/50 hover:border-zinc-600 transition-colors bg-zinc-900/30 active:scale-[0.98] sm:active:scale-[0.99]"
+          className="block p-4 sm:p-6 rounded-xl border border-zinc-800/50 hover:border-zinc-600 transition-colors bg-zinc-900/30 active:scale-[0.98] sm:active:scale-[0.99] cursor-pointer"
         >
         <div>
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2 mb-3 sm:mb-4">
@@ -153,7 +153,7 @@ export default function Blogs() {
       <div className="pt-3 sm:pt-4">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700 hover:border-zinc-600 transition-all duration-300 text-sm font-medium text-zinc-300 hover:text-white active:scale-95"
+          className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700 hover:border-zinc-600 transition-all duration-300 text-sm font-medium text-zinc-300 hover:text-white active:scale-95 cursor-pointer"
         >
           <span>show all posts</span>
         </Link>
