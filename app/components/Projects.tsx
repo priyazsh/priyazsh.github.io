@@ -25,15 +25,17 @@ export default function Projects() {
           key={project.title}
           className="relative block p-6 rounded-xl border border-zinc-800/50 hover:border-zinc-600 transition-colors bg-zinc-900/30"
         >
-          <Link
-            href={project.url.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute inset-0 z-0"
-            aria-label={`${project.title} - View Live`}
-          />
+          {project.url.live && (
+            <Link
+              href={project.url.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0 z-10"
+              aria-label={`${project.title} - View Live`}
+            />
+          )}
 
-          <div className="flex items-center justify-between relative">
+          <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <h3 className="text-lg font-display font-semibold tracking-tight">
                 {project.title}
@@ -47,7 +49,7 @@ export default function Projects() {
               </span>
             </div>
 
-            <div className="flex items-center gap-2 relative z-10">
+            <div className="flex items-center gap-2 relative z-20">
               {project.url.git && (
                 <Link
                   href={project.url.git}
@@ -60,14 +62,16 @@ export default function Projects() {
                 </Link>
               )}
 
-              <span className="p-2 rounded-lg hover:bg-zinc-700 transition-colors">
-                <LuExternalLink size={18} />
-              </span>
+              {project.url.live && (
+                <span className="p-2 rounded-lg hover:bg-zinc-700 transition-colors">
+                  <LuExternalLink size={18} />
+                </span>
+              )}
             </div>
           </div>
 
-          <p className="text-sm text-zinc-400 mt-3 leading-relaxed relative">{project.description}</p>
-          <p className="text-xs text-zinc-500 mt-2 relative">{project.tech}</p>
+          <p className="text-sm text-zinc-400 mt-3 leading-relaxed">{project.description}</p>
+          <p className="text-xs text-zinc-500 mt-2">{project.tech}</p>
         </div>
       ))}
     </section>
