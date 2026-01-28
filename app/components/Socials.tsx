@@ -34,7 +34,7 @@ export default function Socials() {
       label: "Instagram"
     },
     {
-      href: "mailto:priyazsh@hotmail.com",
+      href: "mailto:priyanshprajapat@proton.me",
       icon: FaAt,
       label: "Email"
     },
