@@ -20,12 +20,12 @@
     "status": true
   },
   {
-    "title": "Content Blocker",
-    "description": "A chrome extension that block all content of a website except ads.",
-    "tech": "JavaScript",
+    "title": "Paper Market",
+    "description": "live price stock trading platform with virtual cash.",
+    "tech": "Java, Spring MVC",
     "url": {
-      "git": "",
-      "live": ""
+      "git": "https://github.com/priyazsh/PaperMarket",
+      "live": "https://papermarket.is-a.software"
     },
     "status": false
   }
