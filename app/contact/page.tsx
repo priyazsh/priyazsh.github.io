@@ -142,7 +142,7 @@ export default function Contact() {
           </button>
 
           <span className="text-sm text-tertiary">
-            or <a href="mailto:priyansh.jsx@gmail.com" className="underline underline-offset-2 decoration-1" style={{ color: "var(--text-secondary)", textDecorationColor: "var(--border)" }}>priyansh.jsx@gmail.com</a>
+            or <a href="priyanshprajapat@proton.me" className="underline underline-offset-2 decoration-1" style={{ color: "var(--text-secondary)", textDecorationColor: "var(--border)" }}>priyanshprajapat@proton.me</a>
           </span>
         </div>
 
