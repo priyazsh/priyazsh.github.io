@@ -7,6 +7,7 @@
       "git": "https://github.com/is-a-software/is-a-software",
       "live": "https://is-a.software"
     },
+    "image": "/is-a.software.png",
     "status": true
   },
   {
@@ -17,6 +18,7 @@
       "git": "https://github.com/priyazsh/DevProfiles",
       "live": "https://devprofiles.is-a.software"
     },
+    "image": "/devprofiles.png",
     "status": true
   },
   {
@@ -27,6 +29,7 @@
       "git": "https://github.com/priyazsh/PaperMarket",
       "live": "https://papermarket.is-a.software"
     },
+    "image": "/papermarket.png",
     "status": false
   }
 ]

@@ -11,11 +11,21 @@ export default function Home() {
   return (
     <>
       <Intro />
-      <Socials />
-      <Projects />
-      <Activity />
-      <Blogs />
-      <Footer />
+      <div className="animate-fade-up delay-1">
+        <Socials />
+      </div>
+      <div className="animate-fade-up delay-2">
+        <Projects />
+      </div>
+      <div className="animate-fade-up delay-3">
+        <Activity />
+      </div>
+      <div className="animate-fade-up delay-4">
+        <Blogs />
+      </div>
+      <div className="animate-fade-up delay-5">
+        <Footer />
+      </div>
     </>
   );
 }

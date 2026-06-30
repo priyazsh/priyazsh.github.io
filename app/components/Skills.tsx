@@ -3,44 +3,31 @@ import { RiNextjsLine, RiGithubLine, RiJavaLine } from "react-icons/ri";
 interface Skill {
   name: string;
   icon: React.ComponentType<{ size: number }>;
-  color: string;
 }
 
 export default function Skills() {
-  const iconSize = 14; // Slightly smaller for better mobile fit
+  const iconSize = 16;
 
   const skills: Skill[] = [
-    {
-      name: "Next.js",
-      icon: RiNextjsLine,
-      color: "#E5E5E5",
-    },
-    {
-      name: "Java",
-      icon: RiJavaLine,
-      color: "#f89820",
-    },
-    {
-      name: "GitHub Actions",
-      icon: RiGithubLine,
-      color: "#2388ff",
-    },
+    { name: "Next.js", icon: RiNextjsLine },
+    { name: "Java", icon: RiJavaLine },
+    { name: "GitHub Actions", icon: RiGithubLine },
   ];
 
   return (
     <>
-      {skills.map(({ name, icon: Icon, color }, index) => (
+      {skills.map(({ name, icon: Icon }, index) => (
         <span key={name}>
           <span
-            className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded border text-xs sm:text-sm leading-none whitespace-nowrap"
+            className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-0.5 sm:py-1 rounded-md text-xs sm:text-sm leading-none whitespace-nowrap border"
             style={{
-              backgroundColor: "rgba(255, 255, 255, 0.04)",
-              borderColor: color,
-              color: "inherit",
+              backgroundColor: "var(--bg-elevated)",
+              borderColor: "var(--border)",
+              color: "var(--text)",
             }}
           >
-            <span style={{ color, display: "inline-flex", alignItems: "center" }}>
-              <Icon size={iconSize} />
+            <span style={{ color: "var(--text-tertiary)", display: "inline-flex", alignItems: "center" }}>
+              <Icon size={14} />
             </span>
             <span className="align-middle">{name}</span>
           </span>

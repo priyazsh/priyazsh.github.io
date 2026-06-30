@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react"
 
 export default function Age() {
-
-    const [age, setAge] = useState<string>("21");
+    const [age, setAge] = useState<string>("22");
 
     useEffect(() => {
         const dob = new Date("2004-05-28")
@@ -15,7 +14,7 @@ export default function Age() {
             const years = gap/365.2425
             setAge(years.toFixed(9))
         }
-        const interval = setInterval(updateAge, 1)
+        const interval = setInterval(updateAge, 50)
         return () => clearInterval(interval)
     },[])
 

@@ -1,8 +1,25 @@
 import type { Metadata, Viewport } from "next"
-import Oneko from "./components/Oneko";
+import { ThemeProvider } from "@/lib/theme-context"
+import Dock from "./components/Dock"
+import KonamiCode from "./components/KonamiCode"
+import ClickSound from "./components/ClickSound"
 import { GoogleAnalytics } from "@next/third-parties/google"
 import { inter, jetbrainsMono, geist } from '../lib/fonts'
 import "./globals.css"
+
+const themeInit = `
+(function() {
+  try {
+    var theme = localStorage.getItem('theme');
+    if (!theme) {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+  } catch(e) {}
+})();
+`
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -49,41 +66,48 @@ export const metadata: Metadata = {
     title: "Priyansh Prajapat",
     card: "summary_large_image",
     creator: "@priyazsh",
-    creatorId: "@priyazsh",
     site: "@priyazsh",
-    siteId: "@priyazsh",
     description: "Full stack developer from India.",
     images: ["/og/card.png"],
   },
-    openGraph: {
-      title: "Priyansh Prajapat",
-      description: "Full stack developer from India",
-      url: "https://priyazsh.github.io",
-      images: [
-        {
-          url: "/og/card.png",
-          width: 1200,
-          height: 630,
-          alt: "Priyansh Prajapat",
-          type: "image/png",
-        },
-      ],
-    },
-};
+  openGraph: {
+    title: "Priyansh Prajapat",
+    description: "Full stack developer from India",
+    url: "https://priyazsh.github.io",
+    images: [
+      {
+        url: "/og/card.png",
+        width: 1200,
+        height: 630,
+        alt: "Priyansh Prajapat",
+        type: "image/png",
+      },
+    ],
+  },
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const analytics = process.env.GOOGLE_ANALYTICS ?? "";
+  const analytics = process.env.GOOGLE_ANALYTICS ?? ""
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} ${geist.variable}`}>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable} ${geist.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+      </head>
       <body className={`${inter.className} antialiased`}>
-        <Oneko />
-        <div className="text-white w-full max-w-2xl lg:max-w-lg xl:max-w-2xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
-          {children}
+        <ThemeProvider>
+          <div className="min-h-screen pb-28 sm:pb-32">
+            <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-10 md:py-14">
+              {children}
+            </div>
+          </div>
+          <Dock />
+          <KonamiCode />
+          <ClickSound />
           <GoogleAnalytics gaId={analytics} />
-        </div>
+        </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }
