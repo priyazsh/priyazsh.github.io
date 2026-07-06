@@ -61,7 +61,7 @@ export default function Intro() {
         <FloatingAvatar />
       </div>
 
-      <div className="mt-8 md:mt-16 max-w-3xl space-y-4 md:space-y-5">
+      <div className="mt-4 md:mt-16 max-w-3xl space-y-4 md:space-y-5">
         <ScrollReveal>
           <p className="text-base md:text-lg lg:text-xl leading-relaxed">
             I&apos;m a <Age /> year old full stack developer from India. I enjoy
