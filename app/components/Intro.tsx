@@ -95,12 +95,6 @@ export default function Intro() {
             that are fast, accessible, and well crafted.
           </p>
         </ScrollReveal>
-        <ScrollReveal>
-          <p className="text-base md:text-lg lg:text-xl leading-relaxed">
-            Outside of coding, I read about tech, design, and productivity. I&apos;m
-            always looking to learn something new and improve how I build.
-          </p>
-        </ScrollReveal>
       </div>
     </section>
   );
