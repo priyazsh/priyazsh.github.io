@@ -76,7 +76,7 @@ jobs:
       - name: Build with Next.js
         env:
           GOOGLE_ANALYTICS: ${{ secrets.GOOGLE_ANALYTICS }}
-          NEXT_PUBLIC_CONTACT_API: ${{ vars.NEXT_PUBLIC_CONTACT_API }}
+          NEXT_PUBLIC_CONTACT_API: ${{ secrets.NEXT_PUBLIC_CONTACT_API }}
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
