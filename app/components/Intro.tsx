@@ -18,7 +18,7 @@ export default function Intro() {
         <div className="shrink-0 w-14 h-14 rounded-full overflow-hidden border relative" style={{ borderColor: "var(--border)" }}>
           <div className="avatar-glow" />
           <Image
-            src="/profile-pic.png"
+            src="/priyanshprajapat.png"
             alt="Priyansh Prajapat"
             width={128}
             height={128}
