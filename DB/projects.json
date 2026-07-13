@@ -1,35 +1,30 @@
 [
   {
     "title": "is-a.software",
-    "description": "A subdomain service for developers to use in their projects, providing free and easy-to-configure subdomains for developer projects.",
-    "tech": "Next.js, GitHub Actions",
+    "description": "A subdomain service providing **free, easy-to-configure subdomains** for developer projects.",
+    "details": "is-a.software lets developers claim free subdomains like yourproject.is-a.software. Built with a GitHub Actions-powered pipeline that automatically provisions DNS records when a PR is merged. Supports custom configuration via JSON files in each project's repository.",
+    "tech": ["Spring Boot", "NextJS", "Cloudflare DNS"],
     "url": {
-      "git": "https://github.com/is-a-software/is-a-software",
+      "git": "https://github.com/is-a-software/is-a.software",
       "live": "https://is-a.software"
     },
     "image": "/is-a.software.png",
+    "platform": "Website",
+    "date": "2024 - Present",
     "status": true
   },
   {
     "title": "DevProfiles",
-    "description": "A platform to list your developer profile and showcase your skills to the world. Connect with other developers and build your network.",
-    "tech": "JavaScript",
+    "description": "A platform to list your developer profile, **showcase skills**, and connect with other developers.",
+    "details": "DevProfiles is a community-driven directory where developers can create profiles, highlight their tech stack, and discover others with similar interests. Features include profile search, skill-based filtering, and a clean minimal interface.",
+    "tech": ["JavaScript"],
     "url": {
       "git": "https://github.com/priyazsh/DevProfiles",
       "live": "https://devprofiles.is-a.software"
     },
     "image": "/devprofiles.png",
+    "platform": "Web App",
+    "date": "2024",
     "status": true
-  },
-  {
-    "title": "Paper Market",
-    "description": "live price stock trading platform with virtual cash.",
-    "tech": "Java, Spring MVC",
-    "url": {
-      "git": "https://github.com/priyazsh/PaperMarket",
-      "live": "https://papermarket.is-a.software"
-    },
-    "image": "/papermarket.png",
-    "status": false
   }
 ]

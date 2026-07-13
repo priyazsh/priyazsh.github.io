@@ -1,192 +1,205 @@
 "use client";
 
-import { useRef, useCallback, useState, useEffect } from "react";
-import Link from "next/link";
-import { LuGithub, LuExternalLink } from "react-icons/lu";
+import { useState, useRef, useEffect } from "react";
+import { LuArrowUpRight, LuGithub, LuChevronDown } from "react-icons/lu";
 
 interface Project {
   title: string;
   description: string;
-  tech: string;
+  details?: string;
+  tech: string[];
   url: {
     git?: string;
-    live: string;
+    live?: string;
   };
   image?: string;
+  platform: string;
+  date: string;
   status: boolean;
 }
 
-export default function ProjectCard({ project }: { project: Project }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const spotlightRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
+function renderBoldText(text: string) {
+  const parts = text.split(/\*\*(.+?)\*\*/g);
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <strong key={i} className="font-semibold text-primary">
+        {part}
+      </strong>
+    ) : (
+      <span key={i}>{part}</span>
+    )
+  );
+}
 
-  useEffect(() => {
-    setIsTouch(matchMedia("(pointer: coarse)").matches);
-  }, []);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (isTouch || !cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = ((y - centerY) / centerY) * -3;
-    const rotateY = ((x - centerX) / centerX) * 3;
-
-    setTilt({ x: rotateX, y: rotateY });
-
-    if (spotlightRef.current) {
-      spotlightRef.current.style.background = `radial-gradient(400px circle at ${x}px ${y}px, color-mix(in srgb, var(--text) 6%, transparent), transparent 60%)`;
-    }
-  }, [isTouch]);
-
-  const handleMouseEnter = useCallback(() => {
-    if (isTouch) return;
-    setIsHovered(true);
-  }, [isTouch]);
-
-  const handleMouseLeave = useCallback(() => {
-    if (isTouch) return;
-    setTilt({ x: 0, y: 0 });
-    setIsHovered(false);
-  }, [isTouch]);
-
-  const parallax = (factor: number) => {
-    if (isTouch) return {};
-    return {
-      transform: isHovered
-        ? `translate(${tilt.y * factor * -0.5}px, ${tilt.x * factor * 0.5}px)`
-        : "translate(0, 0)",
-      transition: "transform 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
-    };
-  };
-
-  const cardStyle = isTouch
-    ? {}
-    : {
-        perspective: "800px",
-        transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-        transition: "transform 0.2s cubic-bezier(0.22, 1, 0.36, 1)",
-      };
-
-  return (
-    <div
-      ref={cardRef}
-      className="card-3d"
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      style={cardStyle}
-    >
-      {!isTouch && (
-        <div className="card-3d-border">
-          <div className="card-3d-border-mask" />
+function PreviewPanel({
+  project,
+  isLink,
+}: {
+  project: Project;
+  isLink: boolean;
+}) {
+  const inner = (
+    <div className="relative h-[150px] rounded-t-xl overflow-hidden bg-[#14171A]">
+      {project.image ? (
+        <img
+          src={project.image}
+          alt={`${project.title} preview`}
+          className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          loading="lazy"
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center">
+          <span className="text-white/40 text-sm font-medium">
+            {project.title}
+          </span>
         </div>
       )}
 
-      <div
-        className="card-3d-inner p-4 sm:p-6 md:p-8 border"
-        style={{ borderColor: isHovered && !isTouch ? "transparent" : "var(--border)" }}
-      >
-        {!isTouch && <div ref={spotlightRef} className="card-spotlight" />}
+      {/* Dark overlay on hover */}
+      <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
 
-        {project.url.live && (
-          <Link
-            href={project.url.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute inset-0 z-10"
-            aria-label={`${project.title} - View Live`}
-          />
+      {/* Platform badge — top right */}
+      <span className="absolute top-2.5 right-2.5 px-2 py-0.5 text-[10px] font-medium rounded-full bg-black/60 text-white/90 backdrop-blur-sm">
+        {project.platform}
+      </span>
+
+      {/* GitHub — bottom left */}
+      {project.url.git && (
+        <a
+          href={project.url.git}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${project.title} GitHub`}
+          onClick={(e) => e.stopPropagation()}
+          className="absolute bottom-2.5 left-2.5 z-10 p-2 rounded-lg bg-black/50 text-white/80 backdrop-blur-sm transition-all duration-200 hover:bg-black/70 hover:text-white hover:scale-110 active:scale-95"
+        >
+          <LuGithub size={14} />
+        </a>
+      )}
+
+      {/* Live arrow — bottom right */}
+      {project.url.live && (
+        <span className="absolute bottom-2.5 right-2.5 z-10 p-2 rounded-lg bg-black/50 text-white/80 backdrop-blur-sm transition-all duration-200 group-hover:bg-black/70 group-hover:text-white group-hover:scale-110">
+          <LuArrowUpRight size={14} />
+        </span>
+      )}
+    </div>
+  );
+
+  if (isLink && project.url.live) {
+    return (
+      <a
+        href={project.url.live}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block rounded-t-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--text)]"
+        aria-label={`${project.title} - View Live`}
+      >
+        {inner}
+      </a>
+    );
+  }
+
+  return inner;
+}
+
+export default function ProjectCard({ project }: { project: Project }) {
+  const [expanded, setExpanded] = useState(false);
+  const detailsRef = useRef<HTMLDivElement>(null);
+  const [detailsHeight, setDetailsHeight] = useState(0);
+
+  useEffect(() => {
+    if (detailsRef.current) {
+      setDetailsHeight(detailsRef.current.scrollHeight);
+    }
+  }, [expanded]);
+
+  return (
+    <div
+      className="project-card group relative rounded-xl border transition-all duration-300 ease-out"
+      style={{ borderColor: "var(--border)" }}
+    >
+      <PreviewPanel project={project} isLink={true} />
+
+      {/* Content block */}
+      <div className="p-4">
+        {/* Title */}
+        <h3 className="text-[15px] font-medium text-primary truncate transition-colors duration-200 group-hover:text-[var(--text)]">
+          {project.title}
+        </h3>
+
+        {/* Date / Status */}
+        <div className="flex items-center gap-2 mt-1">
+          <span className="text-xs" style={{ color: "var(--text-tertiary)" }}>
+            {project.date}
+          </span>
+          <span className="text-xs" style={{ color: "var(--text-tertiary)" }}>
+            ·
+          </span>
+          <span
+            className="text-xs"
+            style={{
+              color: project.status
+                ? "var(--green-muted)"
+                : "var(--text-tertiary)",
+            }}
+          >
+            {project.status ? "Live" : "Building"}
+          </span>
+        </div>
+
+        {/* Description */}
+        <p
+          className="text-sm leading-relaxed mt-2.5"
+          style={{ color: "var(--text-secondary)" }}
+        >
+          {renderBoldText(project.description)}
+        </p>
+
+        {/* View more */}
+        {project.details && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="flex items-center gap-1 text-xs font-medium mt-2 min-h-[44px] transition-all duration-200 hover:gap-1.5 active:scale-95"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {expanded ? "Show less" : "View more"}
+            <LuChevronDown
+              size={12}
+              className={`transition-transform duration-300 ease-out ${expanded ? "rotate-180" : ""}`}
+            />
+          </button>
         )}
 
-        <div className="relative z-[2]">
-          <div className="flex items-start justify-between gap-3">
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 sm:gap-3 flex-wrap" style={parallax(1.5)}>
-                <h3 className="text-base sm:text-lg md:text-2xl font-display font-semibold tracking-tight text-primary">
-                  {project.title}
-                </h3>
-
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] sm:text-xs font-medium rounded-full border"
-                  style={{
-                    color: project.status ? "var(--text)" : "var(--text-tertiary)",
-                    backgroundColor: project.status ? "var(--bg-hover)" : "transparent",
-                    borderColor: "var(--border)",
-                  }}
-                >
-                  <span
-                    className={`w-1.5 h-1.5 rounded-full ${project.status ? "status-live" : "status-building"}`}
-                    style={{
-                      backgroundColor: project.status ? "var(--green-muted)" : "var(--text-tertiary)",
-                    }}
-                  />
-                  {project.status ? "Live" : "Building"}
-                </span>
-              </div>
-
-              <p className="text-sm sm:text-base md:text-lg mt-2 sm:mt-3 leading-relaxed text-secondary" style={parallax(1)}>
-                {project.description}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-0.5 relative z-20 shrink-0" style={parallax(2)}>
-              {project.url.git && (
-                <Link
-                  href={project.url.git}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${project.title} GitHub`}
-                  className="p-2 rounded-lg transition-colors duration-200 hover:bg-hover-theme"
-                  style={{ color: "var(--text-tertiary)" }}
-                >
-                  <LuGithub size={16} />
-                </Link>
-              )}
-
-              {project.url.live && (
-                <span
-                  className="p-2 rounded-lg"
-                  style={{ color: "var(--text-tertiary)" }}
-                >
-                  <LuExternalLink size={16} />
-                </span>
-              )}
-            </div>
+        {/* Expandable details */}
+        <div
+          className="overflow-hidden transition-all duration-300 ease-out"
+          style={{ maxHeight: expanded ? detailsHeight : 0 }}
+        >
+          <div ref={detailsRef} className="pt-2.5">
+            <p
+              className="text-sm leading-relaxed"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {renderBoldText(project.details || "")}
+            </p>
           </div>
+        </div>
 
-          <div className="flex flex-wrap gap-1.5 mt-3" style={parallax(0.5)}>
-            {project.tech.split(", ").map((tech) => (
-              <span
-                key={tech}
-                className="inline-flex items-center px-2 py-0.5 text-[11px] sm:text-xs font-medium rounded-md border"
-                style={{
-                  backgroundColor: "var(--bg-elevated)",
-                  borderColor: "var(--border)",
-                  color: "var(--text-secondary)",
-                }}
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-
-          {project.image && (
-            <div className="project-preview">
-              <img
-                src={project.image}
-                alt={`${project.title} preview`}
-                className="w-full h-auto rounded-md sm:rounded-lg border"
-                style={{ borderColor: "var(--border)" }}
-                loading="lazy"
-              />
-            </div>
-          )}
+        {/* Tech tags */}
+        <div className="flex flex-wrap gap-1.5 mt-3">
+          {project.tech.map((tag) => (
+            <span
+              key={tag}
+              className="px-2 py-1 text-[11px] font-medium rounded-md transition-colors duration-200 hover:brightness-125"
+              style={{
+                backgroundColor: "var(--bg-elevated)",
+                color: "var(--text-secondary)",
+              }}
+            >
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
     </div>

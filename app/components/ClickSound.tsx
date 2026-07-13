@@ -56,8 +56,6 @@ export default function ClickSound() {
         target.closest("a") ||
         target.closest("button") ||
         target.closest("[role='button']") ||
-        target.closest(".card") ||
-        target.closest(".card-3d") ||
         target.closest(".btn-ghost");
 
       if (interactive) return "dock";

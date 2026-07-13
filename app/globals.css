@@ -177,142 +177,48 @@ a {
   }
 }
 
-/* ─── 3D Tilt card ─── */
-.card-3d {
-  position: relative;
-  border-radius: 16px;
-  transition: box-shadow 350ms cubic-bezier(0.22, 1, 0.36, 1);
+/* ─── Project card micro-interactions ─── */
+.project-card {
+  background-color: var(--bg-card);
+  animation: card-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.project-card:nth-child(1) { animation-delay: 0ms; }
+.project-card:nth-child(2) { animation-delay: 80ms; }
+.project-card:nth-child(3) { animation-delay: 160ms; }
+.project-card:nth-child(4) { animation-delay: 240ms; }
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (hover: hover) {
-  .card-3d {
-    transform-style: preserve-3d;
-    will-change: transform;
+  .project-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-lg), 0 0 0 1px color-mix(in srgb, var(--text) 4%, transparent);
+    transform: translateY(-3px);
   }
 
-  .card-3d:hover {
-    box-shadow: var(--shadow-lg), 0 0 0 1px color-mix(in srgb, var(--text) 4%, transparent);
+  .project-card:hover .card-spotlight {
+    opacity: 1;
   }
 }
 
-/* Mobile: give card a subtle static shadow */
 @media (hover: none) {
-  .card-3d {
+  .project-card {
     box-shadow: var(--shadow-sm);
   }
-}
 
-.card-3d-inner {
-  position: relative;
-  background-color: var(--bg-card);
-  border-radius: 16px;
-  overflow: hidden;
-  z-index: 1;
-}
-
-/* Gradient border wrapper */
-.card-3d-border {
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  padding: 1px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 0;
-  background: conic-gradient(
-    from var(--gradient-angle, 0deg),
-    color-mix(in srgb, var(--text) 20%, transparent),
-    color-mix(in srgb, var(--text) 5%, transparent),
-    color-mix(in srgb, var(--text) 20%, transparent),
-    color-mix(in srgb, var(--text) 5%, transparent)
-  );
-  animation: rotate-gradient 4s linear infinite;
-}
-
-@media (hover: hover) {
-  .card-3d:hover .card-3d-border {
-    opacity: 1;
-  }
-}
-
-/* Mobile: hide gradient border entirely */
-@media (hover: none) {
-  .card-3d-border {
-    display: none;
-  }
-}
-
-.card-3d-border-mask {
-  width: 100%;
-  height: 100%;
-  background: var(--bg-card);
-  border-radius: 15px;
-}
-
-@keyframes rotate-gradient {
-  from { --gradient-angle: 0deg; }
-  to { --gradient-angle: 360deg; }
-}
-
-@property --gradient-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-/* ─── Status badge animations ─── */
-@keyframes status-ping {
-  0% { transform: scale(1); opacity: 0.7; }
-  75%, 100% { transform: scale(2.5); opacity: 0; }
-}
-
-.status-live {
-  position: relative;
-}
-
-.status-live::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background-color: inherit;
-  animation: status-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-@keyframes status-breathe {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-.status-building {
-  animation: status-breathe 2s ease-in-out infinite;
-}
-
-/* ─── Project image preview ─── */
-.project-preview {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease, margin 0.4s ease;
-  opacity: 0;
-  border-radius: 10px;
-  margin-top: 0;
-}
-
-@media (hover: hover) {
-  .card-3d:hover .project-preview {
-    max-height: 600px;
-    opacity: 1;
-    margin-top: 1rem;
-  }
-}
-
-/* Mobile: always show project image */
-@media (hover: none) {
-  .project-preview {
-    max-height: none;
-    opacity: 1;
-    margin-top: 1rem;
-    overflow: visible;
+  .project-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
   }
 }
 
@@ -976,31 +882,6 @@ html {
 
 .toast.leaving {
   animation: toast-out 0.3s ease forwards;
-}
-
-/* ─── Card spotlight gradient ─── */
-.card-spotlight {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-
-@media (hover: hover) {
-  .card:hover .card-spotlight,
-  .card-3d:hover .card-spotlight {
-    opacity: 1;
-  }
-}
-
-/* Mobile: hide spotlight */
-@media (hover: none) {
-  .card-spotlight {
-    display: none;
-  }
 }
 
 /* ─── Scroll text reveal ─── */
