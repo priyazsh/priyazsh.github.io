@@ -110,9 +110,6 @@ export default function FloatingAvatar() {
       const folEl = avatarRef.current;
       if (!folEl || !running.current) return;
 
-      clearTimeout(idleTimer.current);
-      idleTimer.current = setTimeout(reset, 2000);
-
       const folSpacer = spacerRef.current;
       if (!folSpacer) return;
       const section = folSpacer.closest("section");
@@ -140,7 +137,6 @@ export default function FloatingAvatar() {
 
     window.addEventListener("mousemove", activate);
     window.addEventListener("mousemove", follow);
-    window.addEventListener("scroll", reset, { passive: true });
     window.addEventListener("resize", reset);
 
     return () => {
@@ -148,7 +144,6 @@ export default function FloatingAvatar() {
       clearTimeout(idleTimer.current);
       window.removeEventListener("mousemove", activate);
       window.removeEventListener("mousemove", follow);
-      window.removeEventListener("scroll", reset);
       window.removeEventListener("resize", reset);
     };
   }, []);
