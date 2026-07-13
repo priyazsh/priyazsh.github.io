@@ -170,8 +170,8 @@ export default function FloatingAvatar() {
           <Image
             src="/priyanshprajapat.jpeg"
             alt="Priyansh Prajapat"
-            width={256}
-            height={256}
+            width={512}
+            height={512}
             priority
             className="w-full h-full object-cover"
           />

@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
@@ -57,6 +57,8 @@ const dockItems = [
   { href: "/projects", label: "Projects", icon: Layers },
   { href: "/contact", label: "Contact", icon: MessageCircle },
 ]
+
+/* ─── Desktop: spring-based magnification dock ─── */
 
 function DockItem({ item, mouseX }: { item: typeof dockItems[number]; mouseX: MotionValue<number> }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -188,30 +190,84 @@ function ThemeToggle({ mouseX }: { mouseX: MotionValue<number> }) {
   )
 }
 
-export default function Dock() {
+function DesktopDock() {
   const mouseX = useMotionValue(Infinity)
 
   return (
-    <div className="dock-container">
-      <motion.nav
-        className="dock"
-        onMouseMove={(e) => mouseX.set(e.pageX)}
-        onMouseLeave={() => mouseX.set(Infinity)}
-        onTouchMove={(e) => {
-          const touch = e.touches[0];
-          mouseX.set(touch.pageX);
-        }}
-        onTouchEnd={() => mouseX.set(Infinity)}
-        initial={{ y: 80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.4 }}
+    <motion.nav
+      className="dock"
+      onMouseMove={(e) => mouseX.set(e.pageX)}
+      onMouseLeave={() => mouseX.set(Infinity)}
+      initial={{ y: 80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.4 }}
+    >
+      {dockItems.map((item) => (
+        <DockItem key={item.href} item={item} mouseX={mouseX} />
+      ))}
+      <div className="dock-divider" />
+      <ThemeToggle mouseX={mouseX} />
+    </motion.nav>
+  )
+}
+
+/* ─── Mobile: static icon bar, no springs ─── */
+
+function MobileDock() {
+  const pathname = usePathname()
+  const { theme, toggleTheme } = useTheme()
+
+  return (
+    <motion.nav
+      className="dock dock-mobile"
+      initial={{ y: 40, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0 }}
+    >
+      {dockItems.map((item) => {
+        const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
+        const Icon = item.icon
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="dock-item-static"
+            aria-label={item.label}
+            style={{
+              color: isActive ? "var(--text)" : "var(--text-secondary)",
+              backgroundColor: isActive ? "var(--bg-hover)" : "transparent",
+            }}
+          >
+            <Icon size={20} />
+            {isActive && <span className="dock-indicator" />}
+          </Link>
+        )
+      })}
+      <div className="dock-divider" />
+      <button
+        className="dock-item-static"
+        onClick={() => toggleTheme(0, 0)}
+        aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+        style={{ color: "var(--text-secondary)" }}
       >
-        {dockItems.map((item) => (
-          <DockItem key={item.href} item={item} mouseX={mouseX} />
-        ))}
-        <div className="dock-divider" />
-        <ThemeToggle mouseX={mouseX} />
-      </motion.nav>
+        {theme === "dark" ? <SunIcon size={20} /> : <MoonIcon size={20} />}
+      </button>
+    </motion.nav>
+  )
+}
+
+/* ─── Main dock: conditionally renders mobile or desktop ─── */
+
+export default function Dock() {
+  const [isTouch, setIsTouch] = useState(false)
+
+  useEffect(() => {
+    setIsTouch(matchMedia("(pointer: coarse)").matches)
+  }, [])
+
+  return (
+    <div className="dock-container">
+      {isTouch ? <MobileDock /> : <DesktopDock />}
     </div>
   )
 }

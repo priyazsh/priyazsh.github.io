@@ -548,7 +548,7 @@ a {
   z-index: 50;
   display: flex;
   justify-content: center;
-  padding-bottom: 16px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
   pointer-events: none;
 }
 
@@ -581,13 +581,6 @@ a {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-}
-
-@media (hover: none) {
-  .dock-item {
-    min-width: 44px;
-    min-height: 44px;
-  }
 }
 
 .dock-tooltip {
@@ -634,6 +627,27 @@ a {
   margin: 0 4px;
   background-color: color-mix(in srgb, var(--border) 50%, transparent);
   flex-shrink: 0;
+}
+
+/* ─── Mobile dock: static icon bar ─── */
+.dock-mobile {
+  padding: 6px 10px;
+  gap: 4px;
+}
+
+.dock-item-static {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  position: relative;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .dock-indicator {

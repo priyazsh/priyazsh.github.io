@@ -27,7 +27,7 @@ export default function Socials() {
     { href: "https://github.com/priyazsh", icon: LuGithub, label: "GitHub" },
     { href: "https://x.com/priyazsh", icon: FaXTwitter, label: "X" },
     { href: "https://linkedin.com/in/priyazsh", icon: LuLinkedin, label: "LinkedIn" },
-    { href: "https://instagram.com/priyazsh", icon: LuInstagram, label: "Instagram" },
+    { href: "https://instagram.com/priyansh.jsx", icon: LuInstagram, label: "Instagram" },
     { href: "mailto:priyanshprajapat@proton.me", icon: FaAt, label: "Email", copyValue: "priyanshprajapat@proton.me" },
     { href: "/resume", icon: FaFilePdf, label: "Resume" },
   ];

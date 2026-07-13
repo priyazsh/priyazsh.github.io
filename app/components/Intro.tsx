@@ -20,8 +20,8 @@ export default function Intro() {
           <Image
             src="/priyanshprajapat.jpeg"
             alt="Priyansh Prajapat"
-            width={128}
-            height={128}
+            width={512}
+            height={512}
             priority
             className="w-full h-full object-cover"
           />
