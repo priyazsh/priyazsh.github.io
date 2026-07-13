@@ -200,7 +200,7 @@ function DesktopDock() {
       onMouseLeave={() => mouseX.set(Infinity)}
       initial={{ y: 80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.4 }}
+      transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0 }}
     >
       {dockItems.map((item) => (
         <DockItem key={item.href} item={item} mouseX={mouseX} />
