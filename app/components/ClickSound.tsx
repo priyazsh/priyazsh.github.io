@@ -13,18 +13,23 @@ type SoundKey = keyof typeof SOUNDS;
 
 export default function ClickSound() {
   const cache = useRef<Map<string, HTMLAudioElement>>(new Map());
+  const loaded = useRef(false);
   const isTouchDevice = useRef(false);
 
   useEffect(() => {
     isTouchDevice.current = matchMedia("(pointer: coarse)").matches;
+  }, []);
 
+  function loadAll() {
+    if (loaded.current) return;
+    loaded.current = true;
     Object.values(SOUNDS).forEach((src) => {
       const audio = new Audio(src);
       audio.preload = "auto";
       audio.volume = 0.5;
       cache.current.set(src, audio);
     });
-  }, []);
+  }
 
   useEffect(() => {
     let last = 0;
@@ -32,6 +37,7 @@ export default function ClickSound() {
     let touchStartY = 0;
 
     function play(key: SoundKey) {
+      loadAll();
       const src = SOUNDS[key];
       const original = cache.current.get(src);
       if (!original) return;

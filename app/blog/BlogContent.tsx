@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { LuCalendar, LuClock, LuTag, LuX, LuArrowLeft } from "react-icons/lu"
+import { Calendar, Clock, Tag, X, ArrowLeft } from "lucide-react"
 import Footer from "../components/Footer"
 import type { BlogPost } from "@/lib/posts"
 
@@ -23,7 +23,7 @@ export default function BlogContent({ posts }: { posts: BlogPost[] }) {
   return (
     <section className="space-y-6 mt-2">
       <Link href="/" className="btn-ghost">
-        <LuArrowLeft className="w-3.5 h-3.5" />
+        <ArrowLeft className="w-3.5 h-3.5" />
         <span>Back</span>
       </Link>
 
@@ -48,7 +48,7 @@ export default function BlogContent({ posts }: { posts: BlogPost[] }) {
                 }}
               >
                 {tag}
-                {isActive && <LuX className="w-3 h-3" />}
+                {isActive && <X className="w-3 h-3" />}
               </Link>
             )
           })}
@@ -83,11 +83,11 @@ export default function BlogContent({ posts }: { posts: BlogPost[] }) {
 
               <div className="flex items-center gap-4 mt-2.5">
                 <div className="flex items-center gap-1.5">
-                  <LuCalendar className="w-4 h-4" style={{ color: "var(--text-tertiary)" }} />
+                  <Calendar className="w-4 h-4" style={{ color: "var(--text-tertiary)" }} />
                   <p className="text-sm text-tertiary">{post.date}</p>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <LuClock className="w-4 h-4" style={{ color: "var(--text-tertiary)" }} />
+                  <Clock className="w-4 h-4" style={{ color: "var(--text-tertiary)" }} />
                   <p className="text-sm text-tertiary">{post.readTime}</p>
                 </div>
               </div>
@@ -96,7 +96,7 @@ export default function BlogContent({ posts }: { posts: BlogPost[] }) {
                 <div className="flex flex-wrap gap-1.5 mt-2">
                   {post.tags.map((tag) => (
                     <span key={tag} className="inline-flex items-center gap-1 text-sm text-tertiary">
-                      <LuTag className="w-3.5 h-3.5 shrink-0" />
+                      <Tag className="w-3.5 h-3.5 shrink-0" />
                       <span>{tag}</span>
                     </span>
                   ))}

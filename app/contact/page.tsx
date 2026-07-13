@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react"
 import Link from "next/link"
-import { LuArrowLeft } from "react-icons/lu"
+import { ArrowLeft } from "lucide-react"
 
 const CONTACT_API = process.env.NEXT_PUBLIC_CONTACT_API;
 
@@ -50,7 +50,7 @@ export default function Contact() {
   return (
     <section className="mt-2">
       <Link href="/" className="btn-ghost">
-        <LuArrowLeft className="w-3.5 h-3.5" />
+        <ArrowLeft className="w-3.5 h-3.5" />
         <span>Back</span>
       </Link>
 
@@ -118,6 +118,7 @@ export default function Contact() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
+              maxLength={1900}
               enterKeyHint="send"
               className="block w-full pb-2 text-lg outline-none transition-all duration-250 resize-none"
               style={{
@@ -128,6 +129,9 @@ export default function Contact() {
               onFocus={(e) => (e.target.style.borderBottomColor = "var(--text)")}
               onBlur={(e) => (e.target.style.borderBottomColor = "var(--border)")}
             />
+            <p className="text-xs text-right mt-1" style={{ color: message.length > 1800 ? "#ef4444" : "var(--text-tertiary)" }}>
+              {message.length}/1900
+            </p>
           </div>
         </div>
 

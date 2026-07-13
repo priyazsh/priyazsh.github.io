@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LuArrowLeft } from "react-icons/lu";
+import { ArrowLeft } from "lucide-react";
 import Footer from "../components/Footer";
 
 export const dynamic = 'force-static';
@@ -23,7 +23,7 @@ export default function Resume() {
   return (
     <div className="space-y-6 mt-2">
       <Link href="/" className="btn-ghost">
-        <LuArrowLeft className="w-3.5 h-3.5" />
+        <ArrowLeft className="w-3.5 h-3.5" />
         <span>Back</span>
       </Link>
 

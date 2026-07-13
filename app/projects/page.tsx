@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LuArrowLeft } from "react-icons/lu";
+import { ArrowLeft } from "lucide-react";
 import projects from "@/DB/projects.json";
 import ProjectCard from "../components/ProjectCard";
 import Footer from "../components/Footer";
@@ -28,7 +28,7 @@ export default function ProjectsPage() {
   return (
     <section className="space-y-6 mt-2">
       <Link href="/" className="btn-ghost">
-        <LuArrowLeft className="w-3.5 h-3.5" />
+        <ArrowLeft className="w-3.5 h-3.5" />
         <span>Back</span>
       </Link>
 

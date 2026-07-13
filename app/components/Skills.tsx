@@ -6,8 +6,6 @@ interface Skill {
 }
 
 export default function Skills() {
-  const iconSize = 16;
-
   const skills: Skill[] = [
     { name: "Next.js", icon: RiNextjsLine },
     { name: "Java", icon: RiJavaLine },

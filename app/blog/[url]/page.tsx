@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LuCalendar, LuClock, LuTag, LuArrowLeft } from "react-icons/lu";
+import { Calendar, Clock, Tag, ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
 import { renderMarkdown } from "@/lib/markdown";
 import { getPostBySlug } from "@/lib/posts";
@@ -89,7 +89,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
     return (
       <div className="py-4">
         <Link href="/" className="btn-ghost">
-          <LuArrowLeft className="w-3.5 h-3.5" />
+          <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back</span>
         </Link>
 
@@ -108,7 +108,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
       <ReadingProgress />
       <div className="mb-8">
         <Link href="/blog" className="btn-ghost">
-          <LuArrowLeft className="w-3.5 h-3.5" />
+          <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to blogs</span>
         </Link>
       </div>
@@ -123,19 +123,19 @@ export default async function BlogPost({ params }: BlogPostProps) {
           <div className="flex flex-wrap items-center gap-4 text-base" style={{ color: "var(--text-tertiary)" }}>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-1.5">
-                <LuCalendar className="w-4 h-4" />
+                <Calendar className="w-4 h-4" />
                 <span>{post.date}</span>
               </div>
 
               <div className="flex items-center gap-1.5">
-                <LuClock className="w-4 h-4" />
+                <Clock className="w-4 h-4" />
                 <span>{post.readTime}</span>
               </div>
             </div>
 
             {post.tags && post.tags.length > 0 && (
               <div className="flex items-center gap-2">
-                <LuTag className="w-4 h-4" />
+                <Tag className="w-4 h-4" />
                 <div className="flex gap-2">
                   {post.tags.map((tag: string) => (
                     <span

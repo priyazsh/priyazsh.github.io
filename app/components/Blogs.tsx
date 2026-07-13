@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LuCalendar, LuClock, LuTag } from "react-icons/lu";
+import { Calendar, Clock, Tag } from "lucide-react";
 import { getTopBlogPosts } from "@/lib/posts";
 
 export default function Blogs() {
@@ -24,11 +24,11 @@ export default function Blogs() {
 
             <div className="flex items-center gap-3 sm:gap-4 mt-2 sm:mt-3">
               <div className="flex items-center gap-1">
-                <LuCalendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" style={{ color: "var(--text-tertiary)" }} />
+                <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" style={{ color: "var(--text-tertiary)" }} />
                 <p className="text-xs sm:text-sm text-tertiary">{post.date}</p>
               </div>
               <div className="flex items-center gap-1">
-                <LuClock className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" style={{ color: "var(--text-tertiary)" }} />
+                <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" style={{ color: "var(--text-tertiary)" }} />
                 <p className="text-xs sm:text-sm text-tertiary">{post.readTime}</p>
               </div>
             </div>
@@ -40,7 +40,7 @@ export default function Blogs() {
                     key={tag}
                     className="inline-flex items-center gap-1 text-xs sm:text-sm text-tertiary"
                   >
-                    <LuTag className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+                    <Tag className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
                     <span>{tag}</span>
                   </span>
                 ))}
