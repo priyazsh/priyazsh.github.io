@@ -63,7 +63,7 @@ export default function BlogContent({ posts }: { posts: BlogPost[] }) {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="card block p-7 sm:p-8 cursor-pointer"
+              className="card block p-4 sm:p-7 md:p-8 cursor-pointer"
             >
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">

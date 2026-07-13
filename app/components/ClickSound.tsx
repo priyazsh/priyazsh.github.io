@@ -13,8 +13,11 @@ type SoundKey = keyof typeof SOUNDS;
 
 export default function ClickSound() {
   const cache = useRef<Map<string, HTMLAudioElement>>(new Map());
+  const isTouchDevice = useRef(false);
 
   useEffect(() => {
+    isTouchDevice.current = matchMedia("(pointer: coarse)").matches;
+
     Object.values(SOUNDS).forEach((src) => {
       const audio = new Audio(src);
       audio.preload = "auto";
@@ -25,6 +28,8 @@ export default function ClickSound() {
 
   useEffect(() => {
     let last = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
 
     function play(key: SoundKey) {
       const src = SOUNDS[key];
@@ -36,14 +41,10 @@ export default function ClickSound() {
     }
 
     function getSound(target: HTMLElement): SoundKey | null {
-      // Theme toggle: button inside dock (not a link)
       const dockBtn = target.closest(".dock-icon-btn");
       if (dockBtn && dockBtn.tagName === "BUTTON") return "switch";
-
-      // Dock nav links
       if (dockBtn && dockBtn.tagName === "A") return "dock";
 
-      // Email social icon
       const socialIcon = target.closest(".social-icon");
       if (socialIcon) {
         const href = socialIcon.getAttribute("href") || "";
@@ -51,7 +52,6 @@ export default function ClickSound() {
         return "social";
       }
 
-      // Other interactive elements
       const interactive =
         target.closest("a") ||
         target.closest("button") ||
@@ -65,14 +65,9 @@ export default function ClickSound() {
       return null;
     }
 
-    function handleClick(e: Event) {
+    function tryPlay(target: HTMLElement) {
       const now = Date.now();
       if (now - last < 60) return;
-
-      const touch = e as TouchEvent;
-      const mouse = e as MouseEvent;
-      const target = (touch.touches?.[0]?.target || mouse.target) as HTMLElement;
-      if (!target) return;
 
       const sound = getSound(target);
       if (sound) {
@@ -81,12 +76,38 @@ export default function ClickSound() {
       }
     }
 
-    document.addEventListener("mousedown", handleClick);
-    document.addEventListener("touchstart", handleClick, { passive: true });
+    function handleMouseDown(e: MouseEvent) {
+      if (isTouchDevice.current) return;
+      tryPlay(e.target as HTMLElement);
+    }
+
+    function handleTouchStart(e: TouchEvent) {
+      if (!isTouchDevice.current) return;
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    }
+
+    function handleTouchEnd(e: TouchEvent) {
+      if (!isTouchDevice.current) return;
+
+      const touch = e.changedTouches[0];
+      const dx = Math.abs(touch.clientX - touchStartX);
+      const dy = Math.abs(touch.clientY - touchStartY);
+      if (dx > 10 || dy > 10) return;
+
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (target) tryPlay(target as HTMLElement);
+    }
+
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("touchstart", handleTouchStart, { passive: true });
+    document.addEventListener("touchend", handleTouchEnd, { passive: true });
 
     return () => {
-      document.removeEventListener("mousedown", handleClick);
-      document.removeEventListener("touchstart", handleClick);
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
 

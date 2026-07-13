@@ -115,7 +115,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
 
       <article className="blog-article space-y-8">
         <header className="space-y-4">
-          <h1 className="text-4xl sm:text-5xl font-display font-bold text-primary tracking-tight leading-tight">
+          <h1 className="text-[1.6rem] sm:text-4xl md:text-5xl font-display font-bold text-primary tracking-tight leading-tight">
             {post.title}
           </h1>
           <p className="text-xl sm:text-2xl text-secondary leading-relaxed">{post.desc}</p>

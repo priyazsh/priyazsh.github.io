@@ -75,6 +75,7 @@ export default function Contact() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
+              autoComplete="name"
               className="block w-full pb-2 text-lg outline-none transition-all duration-250"
               style={{
                 background: "transparent",
@@ -95,6 +96,7 @@ export default function Contact() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
               className="block w-full pb-2 text-lg outline-none transition-all duration-250"
               style={{
                 background: "transparent",
@@ -116,6 +118,7 @@ export default function Contact() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
+              enterKeyHint="send"
               className="block w-full pb-2 text-lg outline-none transition-all duration-250 resize-none"
               style={{
                 background: "transparent",

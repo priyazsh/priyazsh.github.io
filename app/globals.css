@@ -40,8 +40,13 @@
 }
 
 html {
-  scroll-behavior: smooth;
   overflow-x: hidden;
+}
+
+@media (hover: hover) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -65,6 +70,12 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 200px 200px;
+}
+
+@media (hover: none) {
+  body::before {
+    display: none;
+  }
 }
 
 html.theme-transitioning,
@@ -442,6 +453,7 @@ a {
   border: 1px solid #30363d;
   background-color: #0d1117;
   color: #e6edf3;
+  max-width: 100%;
 }
 
 .prose-custom shiki-code code {
@@ -553,6 +565,12 @@ a {
   box-shadow: var(--shadow-lg);
 }
 
+@media (hover: none) {
+  .dock {
+    backdrop-filter: blur(12px) saturate(1.2);
+  }
+}
+
 .dark .dock {
   box-shadow: var(--shadow-lg), inset 0 0.5px 0 rgba(255,255,255,0.06);
 }
@@ -563,6 +581,13 @@ a {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+@media (hover: none) {
+  .dock-item {
+    min-width: 44px;
+    min-height: 44px;
+  }
 }
 
 .dock-tooltip {
@@ -927,6 +952,12 @@ html {
   box-shadow: var(--shadow-lg);
   z-index: 9999;
   animation: toast-in 0.3s ease forwards;
+}
+
+@media (hover: none) {
+  .toast {
+    bottom: 120px;
+  }
 }
 
 .toast.leaving {

@@ -10,6 +10,8 @@ export default function ScrollReveal({ children, className = "" }: { children: R
     const el = ref.current;
     if (!el) return;
 
+    const isTouch = matchMedia("(pointer: coarse)").matches;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -18,7 +20,10 @@ export default function ScrollReveal({ children, className = "" }: { children: R
           setInView(false);
         }
       },
-      { threshold: 0.5, rootMargin: "-10% 0px -10% 0px" }
+      {
+        threshold: isTouch ? 0.15 : 0.5,
+        rootMargin: isTouch ? "-5% 0px -5% 0px" : "-10% 0px -10% 0px",
+      }
     );
 
     observer.observe(el);

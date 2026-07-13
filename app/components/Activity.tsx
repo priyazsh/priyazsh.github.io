@@ -158,6 +158,24 @@ export default function Activity() {
     })
   }, [])
 
+  const handleTouchCell = useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0]
+    const target = document.elementFromPoint(touch.clientX, touch.clientY) as HTMLElement
+    if (!target) return
+    const date = target.getAttribute("data-date")
+    const count = target.getAttribute("data-count")
+    if (!date || count === null) {
+      setTooltip(null)
+      return
+    }
+    setTooltip({
+      date,
+      count: Number(count),
+      x: touch.clientX,
+      y: touch.clientY - 40,
+    })
+  }, [])
+
   return (
     <section
       ref={sectionRef}
@@ -175,6 +193,9 @@ export default function Activity() {
         className="overflow-x-auto pb-2"
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setTooltip(null)}
+        onTouchStart={handleTouchCell}
+        onTouchMove={handleTouchCell}
+        onTouchEnd={() => setTooltip(null)}
         style={{ scrollbarWidth: "thin", scrollbarColor: "var(--border) transparent" }}
       >
         {loading ? (

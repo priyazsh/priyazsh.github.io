@@ -197,6 +197,11 @@ export default function Dock() {
         className="dock"
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
+        onTouchMove={(e) => {
+          const touch = e.touches[0];
+          mouseX.set(touch.pageX);
+        }}
+        onTouchEnd={() => mouseX.set(Infinity)}
         initial={{ y: 80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.4 }}
