@@ -96,15 +96,21 @@ function PreviewPanel({
 
   if (isLink && project.url.live) {
     return (
-      <a
-        href={project.url.live}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block rounded-t-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--text)]"
+      <div
+        role="link"
+        tabIndex={0}
+        onClick={() => window.open(project.url.live, "_blank", "noopener,noreferrer")}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            window.open(project.url.live, "_blank", "noopener,noreferrer");
+          }
+        }}
+        className="block cursor-pointer rounded-t-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--text)]"
         aria-label={`${project.title} - View Live`}
       >
         {inner}
-      </a>
+      </div>
     );
   }
 
