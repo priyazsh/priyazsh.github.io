@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 
 const API_URL =
-  "https://github-contributions-api.deno.dev/priyazsh.json?flat=true";
+  "https://github-contributions-api.jogruber.de/v4/priyazsh?y=last";
 
 interface DayData {
   date: string;
@@ -12,8 +12,8 @@ interface DayData {
 }
 
 interface ApiResponse {
-  contributions: { date: string; contributionCount: number }[];
-  totalContributions: number;
+  total: Record<string, number>;
+  contributions: { date: string; count: number; level: number }[];
 }
 
 const TIER_COLORS = [
@@ -34,7 +34,7 @@ function formatDate(dateStr: string): string {
 }
 
 function organizeIntoWeeks(
-  contributions: { date: string; contributionCount: number }[]
+  contributions: { date: string; count: number }[]
 ): { weeks: DayData[][]; min: number; max: number } {
   if (contributions.length === 0) return { weeks: [], min: 0, max: 0 };
 
@@ -43,10 +43,10 @@ function organizeIntoWeeks(
   let max = -Infinity;
 
   for (const c of contributions) {
-    dateMap.set(c.date, c.contributionCount);
-    if (c.contributionCount > 0) {
-      if (c.contributionCount < min) min = c.contributionCount;
-      if (c.contributionCount > max) max = c.contributionCount;
+    dateMap.set(c.date, c.count);
+    if (c.count > 0) {
+      if (c.count < min) min = c.count;
+      if (c.count > max) max = c.count;
     }
   }
 
@@ -293,7 +293,7 @@ export default function GitHubActivity() {
               ? "Unable to load activity data"
               : loading
                 ? "Loading..."
-                : `${raw!.totalContributions.toLocaleString()} activities in ${year}`}
+                : `${raw!.contributions.reduce((s, c) => s + c.count, 0).toLocaleString()} activities in ${year}`}
           </span>
 
           <div className="flex items-center gap-1.5">
